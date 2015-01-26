@@ -61,17 +61,17 @@ namespace JC_1_5.Code.Entities
 
     public class Favor
     {
-        public List<object> participantes { get; set; }
+        public List<Participante> participantes { get; set; }
     }
 
     public class Contra
     {
-        public List<object> participantes { get; set; }
+        public List<Participante> participantes { get; set; }
     }
 
     public class Abstencion
     {
-        public List<object> participantes { get; set; }
+        public List<Participante> participantes { get; set; }
     }
 
     public class Votes
@@ -80,6 +80,7 @@ namespace JC_1_5.Code.Entities
         public Contra contra { get; set; }
         public Abstencion abstencion { get; set; }
         public int Total { get; set; }
+        public string voteType { get; set; }        
     }
 
 
@@ -166,6 +167,24 @@ namespace JC_1_5.Code.Entities
         public string _id { get; set; }
         public string fcbookid { get; set; }
         public string facebookname { get; set; }
+        
+    }
+
+    public class VotoIsolated
+    {
+        public string _id { get; set; }
+        public string fcbookid { get; set; }
+        public string proposalId { get; set; }
+        public string value { get; set; }
+        public string created { get; set; }
+        public string updated { get; set; }
+        public string facebookname { get; set; }
+    }
+
+    public class lstVotoIsolated
+    {
+        public int count { get; set; }
+        public List<VotoIsolated> items { get; set; }
     }
 
     

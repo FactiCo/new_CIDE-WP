@@ -90,7 +90,38 @@
                             </ImageBrush>
                         </phone:PivotItem.Background>
                     </phone:PivotItem>
-                
+
+                    <phone:PivotItem>
+                        <phone:PivotItem.Header>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Image Source="/Assets/Icons/circle.png" Width="25" Height="25"></Image>
+                            </Grid>
+                        </phone:PivotItem.Header>
+                        <phone:PivotItem.Background>
+                            <ImageBrush ImageSource="/Assets/Infografia/QUE_ES_JC_4.png" Stretch="Uniform">
+                            </ImageBrush>
+                        </phone:PivotItem.Background>
+                    </phone:PivotItem>
+
+
+                    <phone:PivotItem>
+                        <phone:PivotItem.Header>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Image Source="/Assets/Icons/circle.png" Width="25" Height="25"></Image>
+                            </Grid>
+                        </phone:PivotItem.Header>
+                        <phone:PivotItem.Background>
+                            <ImageBrush ImageSource="/Assets/Infografia/QUE_ES_JC_5.png" Stretch="Uniform">
+                            </ImageBrush>
+                        </phone:PivotItem.Background>
+                    </phone:PivotItem>
+
                 </phone:Pivot>
                 
             </phone:PanoramaItem>

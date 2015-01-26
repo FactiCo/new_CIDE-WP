@@ -223,7 +223,11 @@ namespace JC_1_5
         private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
         {
             SessionStorage.Remove();
+            notLogged.Visibility = Visibility.Visible;
+            sitLogged.Visibility = Visibility.Collapsed;
         }
+            
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

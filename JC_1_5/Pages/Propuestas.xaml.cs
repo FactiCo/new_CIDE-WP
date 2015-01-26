@@ -19,6 +19,7 @@ using System.IO.IsolatedStorage;
 using System.Text;
 using System.Security.Cryptography;
 
+
 namespace JC_1_5.Pages
 {
 
@@ -32,39 +33,13 @@ namespace JC_1_5.Pages
     {
         public List<catPropuesta> Data { get; set; }
 
-        private async void loadTestimonios()
-        {
-            
-
-            var session = SessionStorage.Load();
-            if (null == session)
-            {
-                return;
-            }
-
-            try
-            {
-
-               
-                var fb = new FacebookClient(session.AccessToken);
-
-                await fb.PostTaskAsync(string.Format("me/feed?message={0}", this.Title), null);
-
-                //this.UpdateStatusBox.Text = string.Empty;
-            }
-            catch (FacebookOAuthException exception)
-            {
-                MessageBox.Show("Error fetching user data: " + exception.Message);
-            }
-
-            /*this.ProgressText = string.Empty;
-            this.ProgressIsVisible = false;
-            this.UpdateStatusButton.IsEnabled = true;*/
-        }
+        FacebookSession sessionStg;
 
 
         public Propuestas()
         {
+            sessionStg = SessionStorage.Load();
+
             InitializeComponent();
             loadPropuestas(lstPropuestas_Familiar, "Justicia para familias");
             loadPropuestas(lstPropuestas_Trabajo, "Justicia en el trabajo");
@@ -80,9 +55,6 @@ namespace JC_1_5.Pages
         private async void loadPropuestas(ListBox lpicker, string cat)
         {
            
-
-
-
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -97,49 +69,52 @@ namespace JC_1_5.Pages
                 
             if (objRespPropuestas.count > 0)
             {
-                
-                
-
-                 var session = SessionStorage.Load();
-
-            if (null != session)
-            {
+             
                 try
                 {
-                    var fb = new FacebookClient(session.AccessToken);
+                    var fb = new FacebookClient(sessionStg.AccessToken);
 
                     dynamic result = await fb.GetTaskAsync("me");
                     var user = new GraphUser(result);
-
+                    
                     objRespPropuestas.items= objRespPropuestas.items.Where(p => p.category == cat).ToList();
                     
                     foreach (Propuesta prop in objRespPropuestas.items)
                     {
+                        
+
+                     
                         prop.votes.Total = prop.votes.favor.participantes.Count + prop.votes.contra.participantes.Count + prop.votes.abstencion.participantes.Count;
+                        
 
                         if (prop.author.fcbookid != null)
                         {
-                            string profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", prop.author.fcbookid, "square", session.AccessToken);
+                            string profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", prop.author.fcbookid, "square", sessionStg.AccessToken);
                             HttpClient objFotoDown = new HttpClient();
                             var respImage = await objFotoDown.GetAsync(profilePictureUrl);
 
                             prop.author.urlFoto = respImage.RequestMessage.RequestUri;
+
+
                             
                         }
                         else
-                        {                            
-                            prop.author.urlFoto = new Uri(@"/Assets/Icons/JC_IconoGrande.png",UriKind.Relative);
+                        {
+                            prop.author.urlFoto = new Uri(@"/Assets/Icons/NEW_LOGO.png", UriKind.Relative);
                         }   
                     }
 
                     lpicker.ItemsSource = objRespPropuestas.items.ToList();
                 }
+
+                    
+                
                 catch (FacebookOAuthException exception)
                 {
                     MessageBox.Show("Error fetching user data: " + exception.Message);
                 }
             }
-            }
+            
 
         }
 
@@ -151,7 +126,7 @@ namespace JC_1_5.Pages
         private void lstPropuestas_Trabajo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Propuesta selectedProp = lstPropuestas_Trabajo.SelectedItem as Propuesta;
-
+            sessionStg = SessionStorage.Load();
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
         }
 

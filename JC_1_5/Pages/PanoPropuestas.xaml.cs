@@ -21,14 +21,33 @@ namespace JC_1_5.Pages
     {
         string strHTML;
         Propuesta objPropuesta;
+
         FacebookSession sessionStg;
+        FacebookClient clientFB;
+
+        string name;
+        string id;
+
+
         public PanoPropuestas()
         {
+
+            sessionStg=new FacebookSession();
             objPropuesta = new Propuesta();
             sessionStg = SessionStorage.Load();
+
+
+            clientFB = new FacebookClient(sessionStg.AccessToken);
+
+            
             InitializeComponent();
             
         }
+
+       
+
+
+
         string idPropRequest;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -41,7 +60,7 @@ namespace JC_1_5.Pages
         }
 
         string jusIDProp;
-
+        dynamic result;
         private async void loadPropuesta(string uidProp)
         {
 
@@ -68,30 +87,48 @@ namespace JC_1_5.Pages
                     lstRespuestas.ItemsSource = objPropuesta.question.answers.ToList(); 
                 }   
 
-
             }
 
-            List<Author> participantesProp = {objPropuesta.votes.favor.participantes,objPropuesta.votes.abstencion.participantes,objPropuesta.votes.contra.participantes};
+            result = await clientFB.GetTaskAsync("me", new { fields = "name,id" });
 
-            
-            //participantesProp.Select(p => p.fcbookid ==sessionStg.FacebookId);
+            name = result.name;
+            id = result.id;
 
-            Author objAutor = participantesProp.Find(p => p.fcbookid == sessionStg.FacebookId);
+            bool findedVote=false;
+            int votesCount=0;
+            string voteType="";
 
-            if (objAutor!=null)
+            if (objPropuesta.votes.favor.participantes.Where(p => p.fcbookid == id).ToList().Count>0)
             {
-                
+                findedVote = true;
+                votesCount = objPropuesta.votes.favor.participantes.Count;
+                voteType="a favor";
+            }
+
+            if (objPropuesta.votes.abstencion.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
+            {
+                findedVote = true;
+                votesCount = objPropuesta.votes.abstencion.participantes.Count;
+                voteType="en abstencion";
+            }
+
+            if (objPropuesta.votes.contra.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
+            {
+                findedVote = true;
+                votesCount = objPropuesta.votes.contra.participantes.Count;
+                voteType="en contra";
+            }
+
+            if (findedVote)
+            {
                 btnFavor.IsEnabled = false;
                 btnAbstencion.IsEnabled = false;
                 btnContra.IsEnabled = false;
 
-                List<Votes> votosTotal = {objPropuesta.votes,objPropuesta.votes,objPropuesta.votes};
+                txtVotados.Text = votesCount.ToString() + " personas han votado " + voteType + " como tu";
 
-                votosTotal.Find(v=>v.
-
-                txtVotados.Text = participantesProp.Find(a => a == objAutor).;
-                
             }
+
 
 
             if (objPropuesta.comments.data.Count>0)
@@ -185,23 +222,28 @@ namespace JC_1_5.Pages
 
             
         }
+        
 
         private async void btnEnviar_Click(object sender, RoutedEventArgs e)
         {
             commentToPost objComentarioAdd = new commentToPost();
-
-            FacebookClient clientFB = new FacebookClient(sessionStg.AccessToken);
             
-            dynamic result = await clientFB.GetTaskAsync("me", new { fields = "name,id" });
-            string name = result.name;
-            string id = result.id;
 
-            objComentarioAdd.from.fcbookid = id;
-            objComentarioAdd.from.name = name;
+            /*dynamic resultComment = await clientFB.GetTaskAsync("me",new
+            {
+                id = "id",
+                name = "name",
+                
+                
+            });*/
+
+            dynamic resultComment = await clientFB.GetTaskAsync("me", new { fields = "name,id" });
+
+            objComentarioAdd.from.fcbookid = resultComment.id;
+            objComentarioAdd.from.name = resultComment.name;
 
             objComentarioAdd.proposalId = this.objPropuesta._id;
             objComentarioAdd.message = txtArgumento.Text;
-
 
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

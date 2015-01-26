@@ -211,6 +211,8 @@
     <Content Include="Assets\Infografia\QUE_ES_JC_1.png" />
     <Content Include="Assets\Infografia\QUE_ES_JC_2.png" />
     <Content Include="Assets\Infografia\QUE_ES_JC_3.png" />
+    <Content Include="Assets\Infografia\QUE_ES_JC_4.png" />
+    <Content Include="Assets\Infografia\QUE_ES_JC_5.png" />
     <Content Include="Assets\NattanFonts\Roboto_Slab\RobotoSlab-Bold.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -32,22 +32,20 @@
         </phone:PanoramaItem>
         
         <phone:PanoramaItem Header="Votos">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="200"></RowDefinition>
-                    <RowDefinition Height="200"></RowDefinition>
-                </Grid.RowDefinitions>
+            
                 <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" >
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="200"></RowDefinition>
-                        <RowDefinition Height="200"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="100"></RowDefinition>
                     </Grid.RowDefinitions>
                     
                     <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row="0" Grid.Column="0" Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="80" Height="80">
                     <Button.Background>
@@ -64,14 +62,14 @@
                         <ImageBrush ImageSource="/Assets/Backs/3.png"></ImageBrush>
                     </Button.Background>
                 </Button>
-                    <TextBlock Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Name="txtVotados" Text="10 Personas"></TextBlock>
-            </Grid>
-
-                <Grid Grid.Row="1" Grid.Column="2">
+                    <TextBlock Grid.ColumnSpan="3" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Name="txtVotados" Text="10 Personas han votado a favor como tu"></TextBlock>
+                   
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
                     <TextBlock Name="txtPregunta" Text="¿Pregunta?"></TextBlock>
                     <ListBox Name="lstRespuestas" SelectionChanged="lstRespuestas_SelectionChanged">
                     </ListBox>
                 </Grid>
+                    
 
             </Grid>
         </phone:PanoramaItem>
@@ -83,36 +81,38 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="0.2*"></RowDefinition>
                 </Grid.RowDefinitions>
-            <ListBox Name="lstArgumenta" Grid.Row="0">
+                <ListBox Name="lstArgumenta" Grid.Row="0" Background="White">
                 <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.3*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="60"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Column="0" Grid.Row="0" Width="50" Height="50" Source="{Binding from.urlFoto}" Margin="5,5,5,5"></Image>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding from.name}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Black.ttf #Source Sans Pro"></TextBlock>
-                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding message}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf #Source Sans Pro"></TextBlock>
-                        </Grid>
 
-                    </DataTemplate>
+                        <DataTemplate>
 
-                </ListBox.ItemTemplate>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Grid.Row="0" Width="50" Height="50" Source="{Binding from.urlFoto}" Margin="5,5,5,5"></Image>
+                                <TextBlock Foreground="Black" Grid.Column="1" Grid.Row="0" Text="{Binding from.name}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Black.ttf #Source Sans Pro"></TextBlock>
+                                <TextBlock Foreground="Black" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Text="{Binding message}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf #Source Sans Pro"></TextBlock>
+                            </Grid>
+
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
                 
             </ListBox>
                 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.4*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBox Name="txtArgumento" Grid.Column="0"></TextBox>
-                    <Button Name="btnEnviar" Content="Enviar" Background="#4A8293" BorderBrush="#4A8293" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Light.ttf #Roboto Slab" Click="btnEnviar_Click" ></Button>
+                    <Button Name="btnEnviar" Grid.Column="1" Content="Enviar" Background="#4A8293" BorderBrush="#4A8293" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Light.ttf #Roboto Slab" Click="btnEnviar_Click" ></Button>
                 </Grid>
             </Grid>
 
