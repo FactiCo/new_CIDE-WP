@@ -1,0 +1,52 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JC_1_5.Pages.Terminos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <!--LayoutRoot es la cuadrícula raíz donde se coloca todo el contenido de la página-->
+        <Grid x:Name="LayoutRoot" Background="Gray" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--TitlePanel contiene el nombre de la aplicación y el título de la página-->
+            <StackPanel Grid.Row="0" Margin="12,17,0,28">
+
+                <TextBlock Text="Terminos y condiciones" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" TextWrapping="Wrap" FontFamily="/res/Roboto_Slab/RobotoSlab-Regular.ttf#Roboto Slab"/>
+            </StackPanel>
+
+            <!--ContentPanel. Colocar aquí el contenido adicional-->
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <RichTextBox FontFamily="/res/Source_Sans_Pro/SourceSansPro-Regular.ttf#Source Sans Pro">
+                    <Paragraph FontWeight="Bold">ACLARACIÓN SOBRE EL ALCANCE DE LA PARTICIPACIÓN DEL CIDE</Paragraph>
+                    <Paragraph>El Centro de Investigación y Docencia Económicas, A.C. (CIDE) no es la Institución responsable de atender los problemas que se planteen a través de los testimonios por parte de los usuarios de esta página. Estos testimonios sólo se recaban con fines informativos y de divulgación, a fin de identificar los problemas que aquejan a las personas en su vida diaria y con el objeto de elaborar propuestas de mejora en la justicia cotidiana.</Paragraph>
+                    <Paragraph FontWeight="Bold">AVISO DE PUBLICIDAD DE LOS TESTIMONIOS</Paragraph>
+                    <Paragraph>Por este medio autorizo al Centro de Investigación y Docencia Económicas, A.C. (CIDE) para que los comentarios y testimonios que envíe a través de esta página, puedan ser utilizados, divulgados y publicados por cualquier medio de comunicación (internet, periódicos, televisión, radio) con el propósito de generar un intercambio de ideas y experiencias sobre los problemas jurídicos en el ámbito de la justicia cotidiana que aquejan al interesado.</Paragraph>
+                    <Paragraph>La recopilación de la información puede ser obtenida a través de terceros quienes pueden capturar testimonios escritos, o a través de la imagen y/o voz del titular de la información, siempre que se cuente con el consentimiento del titular de los datos, para los propósitos señalados en el párrafo anterior.</Paragraph>
+                    <Paragraph>El CIDE no utilizará la información obtenida para otros fines que los expuestos en esta declaración.</Paragraph>
+                    <Paragraph>Al descargar y utilizar esta aplicacion, acepto los términos y condiciones de la presente autorización.</Paragraph>
+
+                    <Paragraph FontWeight="Bold">DESLINDE DE RESPONSABILIDADES DE OPINIÓN</Paragraph>
+                    <Paragraph>Las opiniones, testimonios y datos proporcionados por los usuarios de esta página son de su exclusiva responsabilidad. En ningún caso representan el punto de vista del CIDE como institución, ni su publicación significa su aprobación o la confirmación de su veracidad.</Paragraph>
+                    <Paragraph>Invitamos a los usuarios a aprovechar este espacio de comunicación con respeto, responsabilidad y sin ofensas o difamación.</Paragraph>
+                    <Paragraph>Si encuentras algún contenido que no cumpla con estas características, por favor repórtalo a contacto@justiciacotidiana.mx</Paragraph>
+
+                </RichTextBox>
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+
+</phone:PhoneApplicationPage>

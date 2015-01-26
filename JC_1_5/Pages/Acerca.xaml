@@ -1,0 +1,52 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JC_1_5.Pages.Acerca"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <!--LayoutRoot es la cuadrícula raíz donde se coloca todo el contenido de la página-->
+        <Grid x:Name="LayoutRoot" Background="Gray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--TitlePanel contiene el nombre de la aplicación y el título de la página-->
+            <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                <TextBlock Text="Acerca de" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontFamily="/res/Roboto_Slab/RobotoSlab-Regular.ttf#Roboto Slab"/>
+            </StackPanel>
+
+            <!--ContentPanel. Colocar aquí el contenido adicional-->
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"  >
+                <RichTextBox FontFamily="/res/Source_Sans_Pro/SourceSansPro-Regular.ttf#Source Sans Pro">
+                    <Paragraph>
+                        El Centro de Investigación y Docencia Económicas (CIDE) es una institución pública y autónoma fundada en 1974 que se dedica a la docencia e investigación en ciencias sociales, comprometido con la generación de conocimiento que pueda ser relevante para el desarrollo nacional. Se ha orientado al diseño y evaluación de políticas públicas, al diagnóstico de problemas sociales y a la elaboración de propuestas de solución, desde una perspectiva plural, con la participación de politólogos, abogados, economistas, internacionalistas, entre otros especialistas.
+                    </Paragraph>
+                    <Paragraph>
+                        En noviembre de 2014, el Presidente de la República solicitó al CIDE la tarea de encabezar una amplia consulta que permitiera el diálogo entre ciudadanos, académicos, organizaciones sociales, especialistas, autoridades, con el propósito de elaborar recomendaciones para hacer más eficaz el sistema de justicia, que las reglas de convivencia social se cumplan, las personas puedan reivindicar sus derechos y los infractores tengan consecuencias por sus actos.
+                    </Paragraph>
+                    <Paragraph>
+                        En conjunto con Infotec, centro público de innovación y desarrollo tecnológico adscrito al Consejo Nacional de Ciencia y Tecnología (Conacyt), el CIDE e instituciones aliadas hemos construido esta plataforma tecnológica que permite recopilar testimonios desde cualquier lugar del país sobre las problemáticas referidas y conocer las propuestas de expertos para mejorar la justicia en México.
+                    </Paragraph>
+                    <Paragraph>
+                        Gracias por participar.
+                    </Paragraph>
+                </RichTextBox>
+
+            </Grid>
+        </Grid>
+
+    </ScrollViewer>
+
+
+</phone:PhoneApplicationPage>

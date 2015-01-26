@@ -1,0 +1,84 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JC_1_5.Pages.PanoPropuestas"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"  
+    
+    xmlns:chart="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <phone:Panorama>
+        <phone:Panorama.Background>
+            <ImageBrush ImageSource="/Assets/Backs/pano_v2.png">    
+            </ImageBrush>
+        </phone:Panorama.Background>
+        <phone:PanoramaItem Header="Contenido">
+            <Grid>
+                <TextBlock Name="txtTituloWebView" Text="Titulo"></TextBlock>
+                <phone:WebBrowser Name="browContenido" Loaded="browContenido_Loaded"></phone:WebBrowser>
+
+            </Grid>
+            
+        </phone:PanoramaItem>
+        
+        <phone:PanoramaItem Header="Votos">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"></RowDefinition>
+                    <RowDefinition Height="200"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"></RowDefinition>
+                        <RowDefinition Height="200"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="0" Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="80" Height="80">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Assets/Backs/1.png"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                    <Button Grid.Row="0" Grid.Column="1" Name="btnAbstencion" BorderBrush="Gray" Click="btnAbstencion_Click" Width="80" Height="80">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Assets/Backs/2.png" ></ImageBrush>    
+                    </Button.Background>
+                </Button>
+                    <Button Grid.Row="0" Grid.Column="2" Name="btnContra"  BorderBrush="Red" Click="btnContra_Click" Width="80" Height="80">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Assets/Backs/3.png"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                    <TextBlock Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Name="txtVotados" Text="10 Personas"></TextBlock>
+            </Grid>
+
+                <Grid Grid.Row="1">
+                    <TextBlock Name="txtPregunta" Text="¿Pregunta?"></TextBlock>
+                    <ListBox Name="lstRespuestas" SelectionChanged="lstRespuestas_SelectionChanged">
+                    </ListBox>                
+                </Grid>
+
+            </Grid>
+        </phone:PanoramaItem>
+        <phone:PanoramaItem Header="Argumenta">
+
+        </phone:PanoramaItem>
+    </phone:Panorama>
+    
+</phone:PhoneApplicationPage>
