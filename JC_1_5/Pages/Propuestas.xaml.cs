@@ -94,8 +94,6 @@ namespace JC_1_5.Pages
 
             var responseString = await response.Content.ReadAsStringAsync();
             lstPropuestas objRespPropuestas = JsonConvert.DeserializeObject<lstPropuestas>(responseString);
-        
-
                 
             if (objRespPropuestas.count > 0)
             {
@@ -114,18 +112,23 @@ namespace JC_1_5.Pages
                     var user = new GraphUser(result);
 
                     objRespPropuestas.items= objRespPropuestas.items.Where(p => p.category == cat).ToList();
-
+                    
                     foreach (Propuesta prop in objRespPropuestas.items)
                     {
+                        prop.votes.Total = prop.votes.favor.participantes.Count + prop.votes.contra.participantes.Count + prop.votes.abstencion.participantes.Count;
+
                         if (prop.author.fcbookid != null)
                         {
-                            
-                            prop.author.urlFoto = new Uri (string.Format("https://graph.facebook.com/{0}/picture?access_token={1}", prop.author.fcbookid, session.AccessToken)).ToString();
+                            string profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", prop.author.fcbookid, "square", session.AccessToken);
+                            HttpClient objFotoDown = new HttpClient();
+                            var respImage = await objFotoDown.GetAsync(profilePictureUrl);
+
+                            prop.author.urlFoto = respImage.RequestMessage.RequestUri;
                             
                         }
                         else
-                        {
-                            prop.author.urlFoto = @"/Assets/Icons/JC_IconoGrande.png";
+                        {                            
+                            prop.author.urlFoto = new Uri(@"/Assets/Icons/JC_IconoGrande.png",UriKind.Relative);
                         }   
                     }
 

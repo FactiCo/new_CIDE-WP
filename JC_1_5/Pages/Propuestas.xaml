@@ -15,7 +15,8 @@
     shell:SystemTray.IsVisible="True">
 
         <!--Control Pivot-->
-    <phone:Pivot Title="PROPUESTAS" Name="pvtCats" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf#Roboto Slab" ItemsSource="{Binding}">
+    <phone:Pivot Title="Propuestas" Name="pvtCats" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  >
+       
         
             <phone:Pivot.Background>
                 <ImageBrush ImageSource="/Assets/Backs/pano_v2.png"></ImageBrush>
@@ -24,8 +25,63 @@
         
             
 
-        <phone:PivotItem Name="Trabajo" Header="Trabajo" Loaded="Trabajo_Loaded">
-            <ListBox  Name="lstPropuestas_Trabajo" SelectionChanged="lstPropuestas_Trabajo_SelectionChanged" >
+        <phone:PivotItem Name="Trabajo" Loaded="Trabajo_Loaded">
+            <phone:PivotItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_TRABAJO_TRANS.png" Width="60" Height="60"></Image>
+                    <TextBlock Text="Trabajo" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                </Grid>
+            </phone:PivotItem.Header>
+            <ListBox  Name="lstPropuestas_Trabajo" SelectionChanged="lstPropuestas_Trabajo_SelectionChanged" DataContext="JC_1_5.Code.Entities.Propuesta" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Grid Margin="10,10,10,10" Background="White">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="50*" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="50*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Image Margin="10,10,10,10" Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding author.urlFoto}" Width="80" Height="80" ></Image>
+                                <TextBlock Margin="10,10,10,10" Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" />
+                                <Image VerticalAlignment="Center" Margin="10,10,10,10" Grid.Row="0" Grid.Column="2" Name="imgGo" Source="/Assets/Icons/siguiente.png"></Image>
+                                <RichTextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="#F2F2F2" Margin="10,10,10,10"  HorizontalAlignment="Center">
+                                    <Paragraph>
+                                        <InlineUIContainer><TextBlock Text="Votos hasta ahora: "></TextBlock></InlineUIContainer>
+                                        <InlineUIContainer><TextBlock Text="{Binding votes.Total}"></TextBlock></InlineUIContainer>
+                                    </Paragraph>
+                                </RichTextBox>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </phone:PivotItem>
+
+
+        <phone:PivotItem Name="Ciudadanos">
+            
+            <phone:PivotItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_CIUDADANOS_TRANS.png" Width="60" Height="60" Stretch="Uniform"></Image>
+                    <TextBlock Text="Ciudadanos" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                </Grid>
+            </phone:PivotItem.Header>
+            
+            <ListBox  Name="lstPropuestas_Ciudadanos">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -35,7 +91,7 @@
                                     <ColumnDefinition Width="*" ></ColumnDefinition>
                                     <ColumnDefinition Width="20" ></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding urlFoto}" Width="100" Height="100" ></Image>
+                                <Image Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding author.urlFoto}" ></Image>
                                 <TextBlock Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" />
                                 <Image Grid.Row="0" Grid.Column="2" Name="imgGo"></Image>
                                 <RichTextBox Grid.Row="1" Grid.Column="2" Name="txtVotos" HorizontalAlignment="Center">
@@ -50,7 +106,19 @@
             </ListBox>
         </phone:PivotItem>
 
-        <phone:PivotItem Name="Familiar" Header="Familiar" >
+        <phone:PivotItem Name="Familiar">
+            <phone:PivotItem.Header>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_FAMILIA_TRANS.png" Width="60" Height="60"></Image>
+                <TextBlock Text="Familia" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+            </Grid>
+            </phone:PivotItem.Header>
+
             <ListBox  Name="lstPropuestas_Familiar" SelectionChanged="lstPropuestas_Familiar_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -76,7 +144,18 @@
             </ListBox>
         </phone:PivotItem>
 
-        <phone:PivotItem Name="Empresarios" Header="Empresarios">
+        <phone:PivotItem Name="Empresarios" >
+            <phone:PivotItem.Header>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_EMPRENDEDORES_TRANS.png" Width="60" Height="60"></Image>
+                    <TextBlock Text="Emprendedores" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                </Grid>
+            </phone:PivotItem.Header>
             <ListBox  Name="lstPropuestas_Empresarios">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -102,7 +181,55 @@
             </ListBox>
         </phone:PivotItem>
 
-        <phone:PivotItem Name="Otros" Header="Otros">
+
+        <phone:PivotItem Name="Vecinal">
+            <phone:PivotItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_VECINAL_TRANS.png" Width="60" Height="60"></Image>
+                    <TextBlock Text="Vecinal" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                </Grid>
+            </phone:PivotItem.Header>
+            <ListBox  Name="lstPropuestas_Vecinal">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Grid Margin="10,10,10,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" ></ColumnDefinition>
+                                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="20" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" Name="imgCat"></Image>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" />
+                                <Image Grid.Row="0" Grid.Column="2" Name="imgGo"></Image>
+                                <RichTextBox Grid.Row="1" Grid.Column="2" Name="txtVotos" HorizontalAlignment="Center">
+                                    <Paragraph>Votos hasta ahora</Paragraph>
+                                    <Paragraph x:Name="cntVotos">
+                                    </Paragraph>
+                                </RichTextBox>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </phone:PivotItem>
+
+        <phone:PivotItem Name="Otros" >
+            <phone:PivotItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_OTROS_TRANS.png" Width="60" Height="60"></Image>
+                    <TextBlock Text="Otros" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                </Grid>
+            </phone:PivotItem.Header>
+            
             <ListBox  Name="lstPropuestas_Otros">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -128,57 +255,7 @@
             </ListBox>
         </phone:PivotItem>
 
-        <phone:PivotItem Name="Ciudadanos" Header="Ciudadanos">
-            <ListBox  Name="lstPropuestas_Ciudadanos">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Grid Margin="10,10,10,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100" ></ColumnDefinition>
-                                    <ColumnDefinition Width="*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="20" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Image Grid.Row="0" Grid.Column="0" Name="imgCat"></Image>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" />
-                                <Image Grid.Row="0" Grid.Column="2" Name="imgGo"></Image>
-                                <RichTextBox Grid.Row="1" Grid.Column="2" Name="txtVotos" HorizontalAlignment="Center">
-                                    <Paragraph>Votos hasta ahora</Paragraph>
-                                    <Paragraph x:Name="cntVotos">
-                                    </Paragraph>
-                                </RichTextBox>
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </phone:PivotItem>
 
-        <phone:PivotItem Name="Vecinal">
-            <ListBox  Name="lstPropuestas_Vecinal">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Grid Margin="10,10,10,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100" ></ColumnDefinition>
-                                    <ColumnDefinition Width="*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="20" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Image Grid.Row="0" Grid.Column="0" Name="imgCat"></Image>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" />
-                                <Image Grid.Row="0" Grid.Column="2" Name="imgGo"></Image>
-                                <RichTextBox Grid.Row="1" Grid.Column="2" Name="txtVotos" HorizontalAlignment="Center">
-                                    <Paragraph>Votos hasta ahora</Paragraph>
-                                    <Paragraph x:Name="cntVotos">
-                                    </Paragraph>
-                                </RichTextBox>
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </phone:PivotItem>
     </phone:Pivot>
 
 

@@ -24,23 +24,24 @@ namespace JC_1_5.Code.Entities
         public string category { get; set; }
         public Question question { get; set; }
         public bool valid { get; set; }
-        public Comments comments { get; set; }
+        public Comments  comments { get; set; }
         public Votes votes { get; set; }
         public Author author { get; set; }
         
     }
 
     public class Author
-{
-    public string name { get; set; }
-    public object fcbookid { get; set; }
-    public string urlFoto { get; set; }
-}
+    {
+        public string name { get; set; }
+        public object fcbookid { get; set; }
+        public Uri urlFoto { get; set; }
+    }
 
     public class From
     {
         public string name { get; set; }
         public string fcbookid { get; set; }
+        public Uri urlFoto { get; set; }
     }
 
 
@@ -78,6 +79,7 @@ namespace JC_1_5.Code.Entities
         public Favor favor { get; set; }
         public Contra contra { get; set; }
         public Abstencion abstencion { get; set; }
+        public int Total { get; set; }
     }
 
 
@@ -133,12 +135,30 @@ namespace JC_1_5.Code.Entities
         public string fcbookid { get; set; }
         public string value { get; set; }
     }
-    
+
+    public class commentToPost
+    {
+        public string parent { get; set; }
+        public string proposalId { get; set; }
+        public From from { get; set; }
+        public string message { get; set; }
+    }
 
 
     public class Comments
     {
-        public List<object> data { get; set; }
+        public List<Comentario> data { get; set; }
+    }
+
+    public class Comentario
+    {
+        public string _id { get; set; }
+        public string message { get; set; }
+        public string parent { get; set; }
+        public string created { get; set; }
+        public From from { get; set; }
+        public string ipuser { get; set; }
+        public bool? active { get; set; }
     }
 
     public class Participante
