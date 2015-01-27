@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using JC_1_5.Code;
 using Facebook;
 using Facebook.Client;
+using System.Dynamic;
 
 namespace JC_1_5.Pages
 {
@@ -31,16 +32,20 @@ namespace JC_1_5.Pages
 
         public PanoPropuestas()
         {
+            objComentarioAdd = new commentToPost();
 
-            sessionStg=new FacebookSession();
+
             objPropuesta = new Propuesta();
             sessionStg = SessionStorage.Load();
+
+
 
 
             clientFB = new FacebookClient(sessionStg.AccessToken);
 
             
             InitializeComponent();
+            LoadUserInfo();
             
         }
 
@@ -89,10 +94,7 @@ namespace JC_1_5.Pages
 
             }
 
-            result = await clientFB.GetTaskAsync("me", new { fields = "name,id" });
-
-            name = result.name;
-            id = result.id;
+           
 
             bool findedVote=false;
             int votesCount=0;
@@ -138,8 +140,8 @@ namespace JC_1_5.Pages
 
                     if (prop.from.fcbookid != null)
                     {
-                        
-                        string profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", prop.from.fcbookid, "square", sessionStg.AccessToken);
+
+                        string profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", prop.from.fcbookid, "normal", sessionStg.AccessToken);
                         HttpClient objFotoDown = new HttpClient();
                         var respImage = await objFotoDown.GetAsync(profilePictureUrl);
 
@@ -222,33 +224,53 @@ namespace JC_1_5.Pages
 
             
         }
-        
+
+        public commentToPost objComentarioAdd;
+
+        private void LoadUserInfo()
+        {
+            var fb = new FacebookClient(sessionStg.AccessToken);
+
+            fb.GetCompleted += (o, e) =>
+            {
+                if (e.Error != null)
+                {
+                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
+                    return;
+                }
+
+                var result = (IDictionary<string, object>)e.GetResultData();
+
+                Dispatcher.BeginInvoke(() =>
+                {
+                    //var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.FacebookId, "square", App.AccessToken);
+
+                    
+
+                    name= (string)result["name"];
+                    id= (string)result["id"];
+                });
+            };
+
+            fb.GetTaskAsync("me");
+        }
 
         private async void btnEnviar_Click(object sender, RoutedEventArgs e)
         {
-            commentToPost objComentarioAdd = new commentToPost();
+
+            string strJSON = "{\"parent\":\"\",\"proposalId\":\"" + this.objPropuesta._id + "\",\"from\":{\"fcbookid\":\"" + id + "\",\"name\":\"" + name + "\"},\"message\":\"" + txtArgumento.Text + "\"}";
+
+            //string result = json.Replace("\"", "\"\"");
+
+            //string strJSON = @"{'parent':'','proposalId':'"+this.objPropuesta._id+"','from'{'fcbookid':'"+id+"','name':'"+name+"'},'message':'"+txtArgumento.Text+"'}";
+
             
-
-            /*dynamic resultComment = await clientFB.GetTaskAsync("me",new
-            {
-                id = "id",
-                name = "name",
-                
-                
-            });*/
-
-            dynamic resultComment = await clientFB.GetTaskAsync("me", new { fields = "name,id" });
-
-            objComentarioAdd.from.fcbookid = resultComment.id;
-            objComentarioAdd.from.name = resultComment.name;
-
-            objComentarioAdd.proposalId = this.objPropuesta._id;
-            objComentarioAdd.message = txtArgumento.Text;
+            
 
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string strJSON = JsonConvert.SerializeObject(objComentarioAdd, Formatting.None);
+            //string strJSON = JsonConvert.SerializeObject(objComentarioAdd, Formatting.None);
             HttpContent content = new StringContent(strJSON);
 
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");

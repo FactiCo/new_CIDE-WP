@@ -3,8 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"  
-    
-    xmlns:chart="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    xmlns:sparrow="clr-namespace:Sparrow.Chart;assembly=Sparrow.Chart.WP8.45"
+
     
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -69,7 +69,11 @@
                     <ListBox Name="lstRespuestas" SelectionChanged="lstRespuestas_SelectionChanged">
                     </ListBox>
                 </Grid>
+
+                <sparrow:SparrowChart Grid.Row="3">
                     
+                </sparrow:SparrowChart>
+
 
             </Grid>
         </phone:PanoramaItem>

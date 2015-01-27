@@ -34,7 +34,7 @@
                     <TextBlock Text="Trabajo" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
-            <ListBox  Name="lstPropuestas_Trabajo" SelectionChanged="lstPropuestas_Trabajo_SelectionChanged" DataContext="JC_1_5.Code.Entities.Propuesta" >
+            <ListBox  Name="lstPropuestas_Trabajo" SelectionChanged="lstPropuestas_Trabajo_SelectionChanged" DataContext="JC_1_5.Code.Entities.Propuesta" Background="White" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -87,8 +87,8 @@
                     <TextBlock Text="Ciudadanos" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
-            
-            <ListBox  Name="lstPropuestas_Ciudadanos">
+
+            <ListBox  Name="lstPropuestas_Ciudadanos" Background="White" SelectionChanged="lstPropuestas_Ciudadanos_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -141,7 +141,7 @@
             </Grid>
             </phone:PivotItem.Header>
 
-            <ListBox  Name="lstPropuestas_Familiar" SelectionChanged="lstPropuestas_Familiar_SelectionChanged">
+            <ListBox  Name="lstPropuestas_Familiar" SelectionChanged="lstPropuestas_Familiar_SelectionChanged" Background="White">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -193,7 +193,7 @@
                     <TextBlock Text="Emprendedores" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
-            <ListBox  Name="lstPropuestas_Empresarios">
+            <ListBox  Name="lstPropuestas_Empresarios" Background="White" SelectionChanged="lstPropuestas_Empresarios_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -245,7 +245,7 @@
                     <TextBlock Text="Vecinal" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
-            <ListBox  Name="lstPropuestas_Vecinal">
+            <ListBox  Name="lstPropuestas_Vecinal" Background="White" SelectionChanged="lstPropuestas_Vecinal_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -296,8 +296,8 @@
                     <TextBlock Text="Otros" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
-            
-            <ListBox  Name="lstPropuestas_Otros">
+
+            <ListBox  Name="lstPropuestas_Otros" Background="White" SelectionChanged="lstPropuestas_Otros_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
