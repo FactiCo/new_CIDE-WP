@@ -5,6 +5,7 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"  
     xmlns:sparrow="clr-namespace:Sparrow.Chart;assembly=Sparrow.Chart.WP8.45"
 
+    xmlns:amCharts="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP"
     
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -23,60 +24,123 @@
             <ImageBrush ImageSource="/Assets/Backs/pano_v2.png">    
             </ImageBrush>
         </phone:Panorama.Background>
-        <phone:PanoramaItem Header="Contenido">
-            <Grid>
-                <TextBlock Name="txtTituloWebView" Text="Titulo"></TextBlock>
-                <phone:WebBrowser Name="browContenido" Loaded="browContenido_Loaded"></phone:WebBrowser>
-            </Grid>
-            
-        </phone:PanoramaItem>
         
-        <phone:PanoramaItem Header="Votos">
-            
-                <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" >
-
+        <phone:PanoramaItem Header="Contenido">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="Auto">
+            <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="100"></RowDefinition>
-                        <RowDefinition Height="100"></RowDefinition>
-                        <RowDefinition Height="100"></RowDefinition>
-                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    
-                    <Grid.ColumnDefinitions>
+
+
+
+                    <TextBlock Grid.Row="0" Name="txtTituloWebView" Text="Titulo"></TextBlock>
+                <phone:WebBrowser Grid.Row="1" IsScriptEnabled="True" Name="browContenido" Loaded="browContenido_Loaded"></phone:WebBrowser>
+            
+
+            <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="80" Height="80">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Assets/Backs/1.png"></ImageBrush>
-                    </Button.Background>
+                <Button Grid.Row="0" Grid.Column="0" Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="120" Height="80">
+                            <Image Source="/Assets/Backs/1.png"></Image>
+                            <Button.Background>
+                                <SolidColorBrush Color="LimeGreen"></SolidColorBrush>
+                            </Button.Background>
                 </Button>
-                    <Button Grid.Row="0" Grid.Column="1" Name="btnAbstencion" BorderBrush="Gray" Click="btnAbstencion_Click" Width="80" Height="80">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Assets/Backs/2.png" ></ImageBrush>    
-                    </Button.Background>
-                </Button>
-                    <Button Grid.Row="0" Grid.Column="2" Name="btnContra"  BorderBrush="Red" Click="btnContra_Click" Width="80" Height="80">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Assets/Backs/3.png"></ImageBrush>
-                    </Button.Background>
-                </Button>
-                    <TextBlock Grid.ColumnSpan="3" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Name="txtVotados" Text="10 Personas han votado a favor como tu"></TextBlock>
-                   
+                        <Button Grid.Row="0" Grid.Column="1" Name="btnAbstencion" BorderBrush="Gray" Click="btnAbstencion_Click" Width="120" Height="80">
+                            <Image Source="/Assets/Backs/2.png"></Image>
+                            <Button.Background>
+                                <SolidColorBrush Color="Gray"></SolidColorBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button Grid.Row="0" Grid.Column="2" Name="btnContra"  BorderBrush="Red" Click="btnContra_Click" Width="120" Height="80">
+                            <Image Source="/Assets/Backs/3.png"></Image>
+                            <Button.Background>
+                                <SolidColorBrush Color="Red"></SolidColorBrush>
+                            </Button.Background>
+                        </Button>
+                <TextBlock Grid.ColumnSpan="3" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Name="txtVotados" Text=""></TextBlock>
+
                 <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-                    <TextBlock Name="txtPregunta" Text="¿Pregunta?"></TextBlock>
+                    <TextBlock Name="txtPregunta" Text="¿Pregunta?" TextWrapping="Wrap"></TextBlock>
                     <ListBox Name="lstRespuestas" SelectionChanged="lstRespuestas_SelectionChanged">
-                    </ListBox>
+
+                                <ListBox.ItemTemplate>
+
+                                    <DataTemplate>
+
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+
+                                            <Ellipse Grid.Column="0" Canvas.Left="50" Canvas.Top="50" Width="20" Height="20" Stroke="Black" StrokeThickness="1">
+                                                <Ellipse.Fill>
+                                                    <SolidColorBrush Color="Blue"></SolidColorBrush>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                            
+                                            <TextBlock Foreground="Black" Grid.Column="1" Text="{Binding title}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Black.ttf #Source Sans Pro"></TextBlock>
+                                            
+                                        </Grid>
+
+                                    </DataTemplate>
+
+                                </ListBox.ItemTemplate>
+
+                            </ListBox>
                 </Grid>
+                        <amCharts:PieChart Grid.ColumnSpan="3" Grid.Column="0" Width="200" Height="200" Grid.Row="3" Name="chrtPie" TitleMemberPath="Title" ValueMemberPath="Value">
+                            
 
-                <sparrow:SparrowChart Grid.Row="3">
-                    
-                </sparrow:SparrowChart>
+                                        <amCharts:PieChart.Brushes>
+                                <SolidColorBrush Color="#4A8293"></SolidColorBrush>
+                                <SolidColorBrush Color="#189A8E"></SolidColorBrush>
+                                <SolidColorBrush Color="#58CA8F"></SolidColorBrush>
+                                <SolidColorBrush Color="#34CA67"></SolidColorBrush>
 
 
+                            </amCharts:PieChart.Brushes>
+                            
+                        </amCharts:PieChart>
+
+                        <amCharts:PieChart Grid.Row="3" Name="pie1" TitleMemberPath="Title" ValueMemberPath="Value">
+                            <amCharts:PieChart.Brushes>
+                                <RadialGradientBrush GradientOrigin="0,0" Center="0,0" RadiusX="1" RadiusY="1">
+                                    <GradientStop Offset="0" Color="#FFeeee" />
+                                    <GradientStop Offset="1" Color="#FF0000" />
+                                </RadialGradientBrush>
+                                <RadialGradientBrush GradientOrigin="0,0" Center="0,0">
+                                    <GradientStop Offset="0" Color="#eeffee" />
+                                    <GradientStop Offset="1" Color="#00ff00" />
+                                </RadialGradientBrush>
+                            </amCharts:PieChart.Brushes>
+                        </amCharts:PieChart>
+
+                    </Grid>
             </Grid>
+                
+                
+            </ScrollViewer>
+
         </phone:PanoramaItem>
+        
         
         
         <phone:PanoramaItem Header="Argumenta">

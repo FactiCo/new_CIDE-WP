@@ -33,7 +33,7 @@ namespace JC_1_5.Code
                     currCategory = "Justicia en el trabajo";
                     break;
                 case "familia":
-                    currCategory = "Justicia en las familias";
+                    currCategory = "Justicia para familias";
                     break;
                 case "vecinal":
                     currCategory = "Justicia vecinal y comunitaria";

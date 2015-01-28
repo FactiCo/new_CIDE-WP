@@ -313,6 +313,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AmCharts.Windows.QuickCharts.WP">
+      <HintPath>..\..\..\visual studio 2012\Projects\slnJusticiaCotidiana\packages\amChartsQuickCharts.1.1\lib\sl3-wp\AmCharts.Windows.QuickCharts.WP.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Users\Mario\Documents\Visual Studio 2012\Projects\slnJusticiaCotidiana\packages\Facebook.6.4.2\lib\wp8\Facebook.dll</HintPath>

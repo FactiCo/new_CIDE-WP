@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Windows;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
@@ -32,6 +33,9 @@ namespace JC_1_5.Pages
 
         public PanoPropuestas()
         {
+
+            InitializeComponent();
+
             objComentarioAdd = new commentToPost();
 
 
@@ -44,8 +48,10 @@ namespace JC_1_5.Pages
             clientFB = new FacebookClient(sessionStg.AccessToken);
 
             
-            InitializeComponent();
+           
             LoadUserInfo();
+
+            
             
         }
 
@@ -66,6 +72,9 @@ namespace JC_1_5.Pages
 
         string jusIDProp;
         dynamic result;
+
+
+
         private async void loadPropuesta(string uidProp)
         {
 
@@ -79,22 +88,59 @@ namespace JC_1_5.Pages
             
             this.objPropuesta = objRespPropuestas.items.First(p=>p._id==uidProp);
 
-            browContenido.NavigateToString("<html><head><meta name='viewport' content='width=480, user-scalable=yes' /></head><body>" + this.objPropuesta.description + "</body></html>"); 
-            txtPregunta.Text=objPropuesta.question.title;
+            txtTituloWebView.Text = objPropuesta.title;
+
+
+            string txtWebBorw = this.objPropuesta.description.Replace(@"//www.youtube.com", @"http://www.youtube.com");
+
+            browContenido.NavigateToString("<!doctype html><html><head><style>img {width: 100%;height: auto;} iframe {width:100%; height:500px !important;}</style></head><body>" + txtWebBorw + "</body></html>"); 
+            
 
             txtTituloWebView.Text = objPropuesta.title;
             string currCategory = objPropuesta.category;
-
-            if (objPropuesta.question.answers!=null)
+            if (objPropuesta.question.title!=null)
             {
-                if (objPropuesta.question.answers.Count > 0)
+                txtPregunta.Text=objPropuesta.question.title;
+
+
+                
+
+                /*foreach (Answer partAns in objPropuesta.question.answers)
                 {
-                    lstRespuestas.ItemsSource = objPropuesta.question.answers.ToList(); 
-                }   
+                    
+                }*/
 
+                var responseRespuestas = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/respuestas");
+
+                var responseStringRespuestas = await responseRespuestas.Content.ReadAsStringAsync();
+
+                lstRespuestaGrafica objRespuestas = JsonConvert.DeserializeObject<lstRespuestaGrafica>(responseStringRespuestas);
+
+                List<RespuestaGrafica> lstFiltered = objRespuestas.items.Where(p => p.questionId == objPropuesta.question._id).ToList();
+
+                  // ObservableCollection<PieDataItem> data = new ObservableCollection<PieDataItem>();
+
+
+                if (lstFiltered.Select(p=>p.fcbookid==id)!=null)
+                {
+
+                var data = lstFiltered.GroupBy(info => info.answerId)
+                        .Select(group => new PieDataItem {
+                            Title = objPropuesta.question.answers.Find(ans => ans._id == group.Key).title, 
+                             Value = group.Count() 
+                        });
+                
+                chrtPie.DataSource = data;
+
+                    //lstFiltered.GroupBy(p => p.questionId);
+
+                    //graficaRespuestas();
+                }
+                else
+                { lstRespuestas.ItemsSource = objPropuesta.question.answers.ToList(); }      
+ 
             }
-
-           
+            
 
             bool findedVote=false;
             int votesCount=0;
@@ -105,6 +151,10 @@ namespace JC_1_5.Pages
                 findedVote = true;
                 votesCount = objPropuesta.votes.favor.participantes.Count;
                 voteType="a favor";
+                
+                btnFavor.Click -= btnFavor_Click;
+                btnAbstencion.IsEnabled = false;
+                btnContra.IsEnabled = false;
             }
 
             if (objPropuesta.votes.abstencion.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
@@ -112,6 +162,10 @@ namespace JC_1_5.Pages
                 findedVote = true;
                 votesCount = objPropuesta.votes.abstencion.participantes.Count;
                 voteType="en abstencion";
+
+                btnFavor.IsEnabled = false;
+                btnAbstencion.Click -= btnAbstencion_Click;
+                btnContra.IsEnabled = false;
             }
 
             if (objPropuesta.votes.contra.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
@@ -119,18 +173,21 @@ namespace JC_1_5.Pages
                 findedVote = true;
                 votesCount = objPropuesta.votes.contra.participantes.Count;
                 voteType="en contra";
+
+                btnFavor.IsEnabled = false;
+                btnAbstencion.IsEnabled = false;
+                btnContra.Click -= btnContra_Click;
             }
 
             if (findedVote)
             {
-                btnFavor.IsEnabled = false;
-                btnAbstencion.IsEnabled = false;
-                btnContra.IsEnabled = false;
 
                 txtVotados.Text = votesCount.ToString() + " personas han votado " + voteType + " como tu";
 
             }
 
+
+            
 
 
             if (objPropuesta.comments.data.Count>0)
@@ -164,6 +221,37 @@ namespace JC_1_5.Pages
 
         }
 
+        private async void graficaRespuestas()
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var response = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/respuestas");
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            lstRespuestaGrafica lstAns = JsonConvert.DeserializeObject<lstRespuestaGrafica>(responseString);
+            
+            chrtPie.DataSource = lstAns.items;
+
+            foreach (RespuestaGrafica res in lstAns.items.Where(r => r.questionId == objPropuesta.question._id))
+            {
+                
+                
+                
+            }
+
+
+
+        }
+
+
+
+        
+        
+        
+        
+
         private async void enviaVoto(voteToPost objVoto)
         {
             HttpClient httpClient = new HttpClient();
@@ -183,10 +271,10 @@ namespace JC_1_5.Pages
         private void btnFavor_Click(object sender, RoutedEventArgs e)
         {
             voteToPost objVotoAdd = new voteToPost();
-            objVotoAdd.fcbookid=sessionStg.FacebookId;
+            objVotoAdd.fcbookid = id;
             objVotoAdd.proposalId = this.objPropuesta._id;
             objVotoAdd.value = "favor";
-
+            
             enviaVoto(objVotoAdd);
 
         }
@@ -194,21 +282,19 @@ namespace JC_1_5.Pages
         private void btnAbstencion_Click(object sender, RoutedEventArgs e)
         {
             voteToPost objVotoAdd = new voteToPost();
-            objVotoAdd.fcbookid = sessionStg.FacebookId;
+            objVotoAdd.fcbookid = id;
             objVotoAdd.proposalId = this.objPropuesta._id;
             objVotoAdd.value = "abstencion";
 
             enviaVoto(objVotoAdd);
-
-
         }
 
         private void btnContra_Click(object sender, RoutedEventArgs e)
         {
             voteToPost objVotoAdd = new voteToPost();
-            objVotoAdd.fcbookid = sessionStg.FacebookId;
+            objVotoAdd.fcbookid = id;
             objVotoAdd.proposalId = this.objPropuesta._id;
-            objVotoAdd.value = "abstencion";
+            objVotoAdd.value = "contra";
 
             enviaVoto(objVotoAdd);
 
@@ -216,14 +302,50 @@ namespace JC_1_5.Pages
 
         private void lstRespuestas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+            respondePregunta();
 
+
+
+        }
+
+        private async void respondePregunta()
+        {
+
+            Answer objAnsSelected = lstRespuestas.SelectedItem as Answer;
+ 
+
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //string strJSON = JsonConvert.SerializeObject(objAnsSelected, Formatting.None);
+
+            string strJSON = "{\"fcbookid\":\"" + id + "\"}";
+            HttpContent content = new StringContent(strJSON);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            string urlPOST = "http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/preguntas/" + objPropuesta.question._id + "?answer=" + objAnsSelected._id;
+            var response = await httpClient.PostAsync(urlPOST,content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+            var serializer = new JsonSerializer();
         }
 
         private void browContenido_Loaded(object sender, RoutedEventArgs e)
         {
-
-            
+            //browContenido.LoadCompleted += Browser_dohack;          
         }
+
+        
+
+    private void Browser_dohack(object sender, NavigationEventArgs e)
+    {
+        string html = browContenido.SaveToString();
+        string hackstring = "<meta name=\"viewport\" content=\"width=320,user-scalable=yes\" />";
+        html = html.Insert(html.IndexOf("<head>", 0) + 6, hackstring);
+        browContenido.NavigateToString(html);
+        browContenido.LoadCompleted -= Browser_dohack;
+    }
 
         public commentToPost objComentarioAdd;
 
@@ -245,8 +367,6 @@ namespace JC_1_5.Pages
                 {
                     //var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.FacebookId, "square", App.AccessToken);
 
-                    
-
                     name= (string)result["name"];
                     id= (string)result["id"];
                 });
@@ -264,9 +384,6 @@ namespace JC_1_5.Pages
 
             //string strJSON = @"{'parent':'','proposalId':'"+this.objPropuesta._id+"','from'{'fcbookid':'"+id+"','name':'"+name+"'},'message':'"+txtArgumento.Text+"'}";
 
-            
-            
-
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -281,5 +398,12 @@ namespace JC_1_5.Pages
             var serializer = new JsonSerializer();
 
         }
+
+    }
+
+    public class PieDataItem
+    {
+        public string Title { get; set; }
+        public double Value { get; set; }
     }
 }

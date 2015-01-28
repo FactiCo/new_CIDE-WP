@@ -164,3 +164,6 @@ C:\Users\Mario\Documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\JC_1_5.dll
 C:\Users\Mario\Documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\JC_1_5.pdb
 C:\Users\Mario\Documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\XapCacheFile.xml
 C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\JC_1_5.csprojResolveAssemblyReference.cache
+C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\Sparrow.Chart.WP8.45.dll
+C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\Sparrow.Chart.WP8.45.xml
+C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\AmCharts.Windows.QuickCharts.WP.dll

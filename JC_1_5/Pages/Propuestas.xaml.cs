@@ -126,7 +126,7 @@ namespace JC_1_5.Pages
         private void lstPropuestas_Trabajo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Propuesta selectedProp = lstPropuestas_Trabajo.SelectedItem as Propuesta;
-            (sender as ListBox).SelectedIndex = -1;
+            
 
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
         }
@@ -152,7 +152,8 @@ namespace JC_1_5.Pages
 
             Propuesta selectedProp = lstPropuestas_Familiar.SelectedItem as Propuesta;
 
-            (sender as ListBox).SelectedIndex = -1;
+            
+
 
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
 
@@ -163,7 +164,7 @@ namespace JC_1_5.Pages
 
             Propuesta selectedProp = lstPropuestas_Ciudadanos.SelectedItem as Propuesta;
 
-            (sender as ListBox).SelectedIndex = -1;
+           
 
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
 
@@ -173,7 +174,7 @@ namespace JC_1_5.Pages
         {
 
             Propuesta selectedProp = lstPropuestas_Empresarios.SelectedItem as Propuesta;
-            (sender as ListBox).SelectedIndex = -1;
+            
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
 
         }
@@ -182,7 +183,7 @@ namespace JC_1_5.Pages
         {
 
             Propuesta selectedProp = lstPropuestas_Vecinal.SelectedItem as Propuesta;
-            (sender as ListBox).SelectedIndex = -1;
+            
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
 
         }
@@ -190,7 +191,7 @@ namespace JC_1_5.Pages
         private void lstPropuestas_Otros_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Propuesta selectedProp = lstPropuestas_Otros.SelectedItem as Propuesta;
-            (sender as ListBox).SelectedIndex = -1;
+            
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
 
         }

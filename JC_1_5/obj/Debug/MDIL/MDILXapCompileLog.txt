@@ -1,5 +1,7 @@
 Compile filter specified.  Only the following files will be processed:
 c:\users\mario\documents\github\new_cide-wp\jc_1_5\bin\debug\mdil\jc_1_5.dll
+Processing file: C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\AmCharts.Windows.QuickCharts.WP.dll
+File C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\AmCharts.Windows.QuickCharts.WP.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\Facebook.Client.dll
 File C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\Facebook.Client.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\Facebook.dll
@@ -24,6 +26,8 @@ Processing file: C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MD
 File C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\Microsoft.Threading.Tasks.Extensions.Phone.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\Newtonsoft.Json.dll
 File C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\Newtonsoft.Json.dll is not in the compile filter. Skipping.
+Processing file: C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\Sparrow.Chart.WP8.45.dll
+File C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\Sparrow.Chart.WP8.45.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\System.Net.Http.dll
 File C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\System.Net.Http.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Debug\MDIL\System.Net.Http.Extensions.dll

@@ -45,11 +45,18 @@ namespace JC_1_5.Code.Entities
     }
 
 
+    public class Participante
+    {
+        public string _id { get; set; }
+        public string fcbookid { get; set; }
+    }
+
     public class Answer
     {
-        public string title { get; set; }
         public string _id { get; set; }
+        public string title { get; set; }
         public int count { get; set; }
+        public List<Participante> participantes { get; set; }
     }
 
     public class Question
@@ -162,13 +169,7 @@ namespace JC_1_5.Code.Entities
         public bool? active { get; set; }
     }
 
-    public class Participante
-    {
-        public string _id { get; set; }
-        public string fcbookid { get; set; }
-        public string facebookname { get; set; }
-        
-    }
+   
 
     public class VotoIsolated
     {
@@ -185,6 +186,45 @@ namespace JC_1_5.Code.Entities
     {
         public int count { get; set; }
         public List<VotoIsolated> items { get; set; }
+    }
+
+
+    public class answerToPost
+    {
+        //public string _id { get; set; }
+        //public string created { get; set; }
+        public string answerId { get; set; }
+        public string fcbookid { get; set; }
+        public string questionId { get; set; }
+    }
+
+    public class Statistic
+    {
+        public string answerId { get; set; }
+        public string title { get; set; }
+        public int count { get; set; }
+    }
+
+    public class GraphStats
+    {
+        public string result { get; set; }
+        public List<Statistic> statistics { get; set; }
+        public string _id { get; set; }
+    }
+
+    public class RespuestaGrafica
+    {
+        public string _id { get; set; }
+        public string created { get; set; }
+        public string answerId { get; set; }
+        public string fcbookid { get; set; }
+        public string questionId { get; set; }
+    }
+
+    public class lstRespuestaGrafica
+    {
+        public int count { get; set; }
+        public List<RespuestaGrafica> items { get; set; }
     }
 
     

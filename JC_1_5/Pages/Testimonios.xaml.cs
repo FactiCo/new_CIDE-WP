@@ -162,8 +162,7 @@ Fecha: 25 de febrero de 2015
 
             if (currObjRespTestimonios.count > 0)
             {
-                lbxTestimoniosRoot.ItemsSource = currObjRespTestimonios.items.Where(p => p.category == currCategory).OrderByDescending(p => p.created).ToList();
-                
+                lbxTestimoniosRoot.ItemsSource = currObjRespTestimonios.items.Where(p => p.category == currCategory).OrderByDescending(p => p.created).ToList();    
             }
         }
 
