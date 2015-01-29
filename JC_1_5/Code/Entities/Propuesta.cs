@@ -57,6 +57,7 @@ namespace JC_1_5.Code.Entities
         public string title { get; set; }
         public int count { get; set; }
         public List<Participante> participantes { get; set; }
+        public string ColorBrush { get; set; }
     }
 
     public class Question
@@ -161,15 +162,21 @@ namespace JC_1_5.Code.Entities
     public class Comentario
     {
         public string _id { get; set; }
-        public string message { get; set; }
         public string parent { get; set; }
+        public string proposalId { get; set; }
+        public string message { get; set; }
         public string created { get; set; }
         public From from { get; set; }
         public string ipuser { get; set; }
         public bool? active { get; set; }
+        
     }
 
-   
+    public class lstComentarioIsolated
+    {
+        public int count { get; set; }
+        public List<Comentario> items { get; set; }
+    }
 
     public class VotoIsolated
     {

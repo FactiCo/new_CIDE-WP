@@ -16,6 +16,8 @@ using JC_1_5.Code;
 using Facebook;
 using Facebook.Client;
 using System.Dynamic;
+using System.IO;
+using System.Text;
 
 namespace JC_1_5.Pages
 {
@@ -52,6 +54,8 @@ namespace JC_1_5.Pages
             LoadUserInfo();
 
             
+
+           
             
         }
 
@@ -73,7 +77,28 @@ namespace JC_1_5.Pages
         string jusIDProp;
         dynamic result;
 
+        private async void loadFBPhoto()
+        {
 
+            if (objPropuesta.author.fcbookid != null)
+            {
+
+                string profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", this.objPropuesta.author.fcbookid, "square", sessionStg.AccessToken);
+                HttpClient objFotoDown = new HttpClient();
+                var respImage = await objFotoDown.GetAsync(profilePictureUrl);
+
+                this.objPropuesta.author.urlFoto = respImage.RequestMessage.RequestUri;
+               
+                
+
+            }
+            else
+            {
+                objPropuesta.author.urlFoto = new Uri(@"/Assets/Icons/JC_IconoGrande.png", UriKind.Relative);
+                
+                
+            }
+        }
 
         private async void loadPropuesta(string uidProp)
         {
@@ -88,28 +113,20 @@ namespace JC_1_5.Pages
             
             this.objPropuesta = objRespPropuestas.items.First(p=>p._id==uidProp);
 
-            txtTituloWebView.Text = objPropuesta.title;
+            loadFBPhoto();
 
+            txtTituloWebView.Text = objPropuesta.title;
 
             string txtWebBorw = this.objPropuesta.description.Replace(@"//www.youtube.com", @"http://www.youtube.com");
 
             browContenido.NavigateToString("<!doctype html><html><head><style>img {width: 100%;height: auto;} iframe {width:100%; height:500px !important;}</style></head><body>" + txtWebBorw + "</body></html>"); 
-            
 
             txtTituloWebView.Text = objPropuesta.title;
             string currCategory = objPropuesta.category;
             if (objPropuesta.question.title!=null)
             {
                 txtPregunta.Text=objPropuesta.question.title;
-
-
-                
-
-                /*foreach (Answer partAns in objPropuesta.question.answers)
-                {
-                    
-                }*/
-
+                txtPreguntaVis.Text = objPropuesta.question.title;
                 var responseRespuestas = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/respuestas");
 
                 var responseStringRespuestas = await responseRespuestas.Content.ReadAsStringAsync();
@@ -120,137 +137,108 @@ namespace JC_1_5.Pages
 
                   // ObservableCollection<PieDataItem> data = new ObservableCollection<PieDataItem>();
 
+                RespuestaGrafica ansFilt = lstFiltered.Find(p=>p.fcbookid==id);
 
-                if (lstFiltered.Select(p=>p.fcbookid==id)!=null)
+                if (ansFilt!=null)
                 {
-
-                var data = lstFiltered.GroupBy(info => info.answerId)
-                        .Select(group => new PieDataItem {
-                            Title = objPropuesta.question.answers.Find(ans => ans._id == group.Key).title, 
-                             Value = group.Count() 
-                        });
-                
-                chrtPie.DataSource = data;
-
-                    //lstFiltered.GroupBy(p => p.questionId);
-
-                    //graficaRespuestas();
+                    
+                    
+                    chrtPie.Visibility = Visibility.Visible;
+                    txtPreguntaVis.Visibility = Visibility.Visible;
+                    graficaRespuestas(lstFiltered);
                 }
                 else
-                { lstRespuestas.ItemsSource = objPropuesta.question.answers.ToList(); }      
+
+                {
+                    string[] colores = new string[] { "#4A8293", "#189A8E", "#58CA8F", "#34CA67" };
+                    int i=0;
+                    foreach (Answer ans in objPropuesta.question.answers)
+                    {
+                        ans.ColorBrush = colores[i];
+                        i++;
+                    }
+                    grdPregunta.Visibility = Visibility.Visible;
+                    lstRespuestas.ItemsSource = objPropuesta.question.answers.ToList(); 
+                }      
  
             }
-            
 
-            bool findedVote=false;
-            int votesCount=0;
-            string voteType="";
-
-            if (objPropuesta.votes.favor.participantes.Where(p => p.fcbookid == id).ToList().Count>0)
-            {
-                findedVote = true;
-                votesCount = objPropuesta.votes.favor.participantes.Count;
-                voteType="a favor";
-                
-                btnFavor.Click -= btnFavor_Click;
-                btnAbstencion.IsEnabled = false;
-                btnContra.IsEnabled = false;
-            }
-
-            if (objPropuesta.votes.abstencion.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
-            {
-                findedVote = true;
-                votesCount = objPropuesta.votes.abstencion.participantes.Count;
-                voteType="en abstencion";
-
-                btnFavor.IsEnabled = false;
-                btnAbstencion.Click -= btnAbstencion_Click;
-                btnContra.IsEnabled = false;
-            }
-
-            if (objPropuesta.votes.contra.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
-            {
-                findedVote = true;
-                votesCount = objPropuesta.votes.contra.participantes.Count;
-                voteType="en contra";
-
-                btnFavor.IsEnabled = false;
-                btnAbstencion.IsEnabled = false;
-                btnContra.Click -= btnContra_Click;
-            }
-
-            if (findedVote)
-            {
-
-                txtVotados.Text = votesCount.ToString() + " personas han votado " + voteType + " como tu";
-
-            }
-
-
-            
-
-
-            if (objPropuesta.comments.data.Count>0)
-            {
-                foreach (Comentario prop in objPropuesta.comments.data)
-                {
-
-                    if (prop.from.fcbookid != null)
-                    {
-
-                        string profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", prop.from.fcbookid, "normal", sessionStg.AccessToken);
-                        HttpClient objFotoDown = new HttpClient();
-                        var respImage = await objFotoDown.GetAsync(profilePictureUrl);
-
-                        prop.from.urlFoto = respImage.RequestMessage.RequestUri;
-
-                    }
-                    else
-                    {
-                        prop.from.urlFoto = new Uri(@"/Assets/Icons/JC_IconoGrande.png", UriKind.Relative);
-                    }
-
-                    if (prop.from.fcbookid == sessionStg.FacebookId)
-                    {
-                        btnEnviar.IsEnabled = false;
-                    }
-                }
-
-                lstArgumenta.ItemsSource = objPropuesta.comments.data.ToList();
-            }
-
+            loadVotos();
+            loadComentarios(false);
         }
 
-        private async void graficaRespuestas()
+        private async void loadComentarios(bool afterAdd)
         {
-            HttpClient httpClient = new HttpClient();
+            List<Comentario> sourceComs= new List<Comentario>();
+
+            if (afterAdd)
+            { 
+                HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var response = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/respuestas");
+            var response = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/comentarios");
 
             var responseString = await response.Content.ReadAsStringAsync();
+            lstComentarioIsolated lstComs = JsonConvert.DeserializeObject<lstComentarioIsolated>(responseString);
 
-            lstRespuestaGrafica lstAns = JsonConvert.DeserializeObject<lstRespuestaGrafica>(responseString);
-            
-            chrtPie.DataSource = lstAns.items;
+            sourceComs = lstComs.items.Where(c => c.proposalId == objPropuesta._id).ToList();
 
-            foreach (RespuestaGrafica res in lstAns.items.Where(r => r.questionId == objPropuesta.question._id))
-            {
-                
-                
-                
+            txtArgumento.Text = "";
+
+            }
+            else
+            { 
+                sourceComs=objPropuesta.comments.data;
             }
 
+            
+            
 
+            foreach (Comentario prop in sourceComs)
+            {
 
+                if (prop.from.fcbookid != null)
+                {
+
+                    string profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", prop.from.fcbookid, "normal", sessionStg.AccessToken);
+                    HttpClient objFotoDown = new HttpClient();
+                    var respImage = await objFotoDown.GetAsync(profilePictureUrl);
+
+                    prop.from.urlFoto = respImage.RequestMessage.RequestUri;
+
+                }
+                else
+                {
+                    prop.from.urlFoto = new Uri(@"/Assets/Icons/JC_IconoGrande.png", UriKind.Relative);
+                }
+
+                if (prop.from.fcbookid == sessionStg.FacebookId)
+                {
+                    btnEnviar.IsEnabled = false;
+                }
+            }
+
+            lstArgumenta.ItemsSource = sourceComs.ToList();
+            
+                
         }
 
+        private void graficaRespuestas(List<RespuestaGrafica> lstSource)
+        {
 
+            var data = lstSource.GroupBy(info => info.answerId)
+                    .Select(group => new PieDataItem
+                    {
+                        Title = objPropuesta.question.answers.Find(ans => ans._id == group.Key).title,
+                        Value = group.Count()
+                    });
 
-        
-        
-        
-        
+            chrtPie.DataSource = data;
+
+            chrtPie.Visibility = Visibility.Visible;
+            grdPregunta.Visibility = Visibility.Collapsed;
+
+        }
 
         private async void enviaVoto(voteToPost objVoto)
         {
@@ -265,8 +253,105 @@ namespace JC_1_5.Pages
             var response = await httpClient.PostAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/votos", content);
 
             var responseString = await response.Content.ReadAsStringAsync();
-            var serializer = new JsonSerializer();
+            
+            
+            
+            var responseVotes = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/votos");
+            var responseStringVotes = await responseVotes.Content.ReadAsStringAsync();
+
+            lstVotoIsolated objVotos = JsonConvert.DeserializeObject<lstVotoIsolated>(responseStringVotes);
+
+            if (objVotos != null)
+            {
+                MessageBox.Show("Gracias por enviar tu voto", "Justicia Cotidiana", MessageBoxButton.OK);
+
+
+
+                reloadVotes(objVotos, objVoto.value);
+
+            }
+            
+
+            
+            
         }
+
+        private void reloadVotes(lstVotoIsolated lstVotos,string voteType)
+        {
+
+            if (voteType=="favor")
+            {
+                btnFavor.Click -= btnFavor_Click;
+                btnAbstencion.IsEnabled = false;
+                btnContra.IsEnabled = false;
+            }
+
+            if (voteType == "abstencion")
+            {
+                btnFavor.IsEnabled = false;
+                btnAbstencion.Click -= btnAbstencion_Click;
+                btnContra.IsEnabled = false;
+            }
+
+            if (voteType == "contra")
+            {
+                btnFavor.IsEnabled = false;
+                btnAbstencion.IsEnabled = false;
+                btnContra.Click -= btnContra_Click;
+            }
+             
+            txtVotados.Visibility=Visibility.Visible;
+            txtVotados.Text = lstVotos.items.Where(v=>v.value==voteType && v.proposalId==objPropuesta._id).Count().ToString() + " personas han votado " + voteType + " como tú";   
+            
+        }
+
+        private void loadVotos()
+        {
+            bool findedVote = false;
+            int votesCount = 0;
+            string voteType = "";
+
+            if (objPropuesta.votes.favor.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
+            {
+                findedVote = true;
+                votesCount = objPropuesta.votes.favor.participantes.Count;
+                voteType = "a favor";
+
+                btnFavor.Click -= btnFavor_Click;
+                btnAbstencion.IsEnabled = false;
+                btnContra.IsEnabled = false;
+            }
+
+            if (objPropuesta.votes.abstencion.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
+            {
+                findedVote = true;
+                votesCount = objPropuesta.votes.abstencion.participantes.Count;
+                voteType = "en abstencion";
+
+                btnFavor.IsEnabled = false;
+                btnAbstencion.Click -= btnAbstencion_Click;
+                btnContra.IsEnabled = false;
+            }
+
+            if (objPropuesta.votes.contra.participantes.Where(p => p.fcbookid == id).ToList().Count > 0)
+            {
+                findedVote = true;
+                votesCount = objPropuesta.votes.contra.participantes.Count;
+                voteType = "en contra";
+
+                btnFavor.IsEnabled = false;
+                btnAbstencion.IsEnabled = false;
+                btnContra.Click -= btnContra_Click;
+            }
+
+            if (findedVote)
+            {
+                txtVotados.Text = votesCount.ToString() + " personas han votado " + voteType + " como tú";
+            }
+        }
+
+        
+
 
         private void btnFavor_Click(object sender, RoutedEventArgs e)
         {
@@ -304,9 +389,6 @@ namespace JC_1_5.Pages
         {
             
             respondePregunta();
-
-
-
         }
 
         private async void respondePregunta()
@@ -328,7 +410,20 @@ namespace JC_1_5.Pages
             var response = await httpClient.PostAsync(urlPOST,content);
 
             var responseString = await response.Content.ReadAsStringAsync();
-            var serializer = new JsonSerializer();
+
+            var responseGraph = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/respuestas/");
+
+            var responseStringGraph = await response.Content.ReadAsStringAsync();
+
+
+            lstRespuestaGrafica objRespuestas = JsonConvert.DeserializeObject<lstRespuestaGrafica>(responseStringGraph);
+
+            List<RespuestaGrafica> lstFiltered = objRespuestas.items.Where(p => p.questionId == objPropuesta.question._id).ToList();
+
+
+                graficaRespuestas(lstFiltered);
+            
+
         }
 
         private void browContenido_Loaded(object sender, RoutedEventArgs e)
@@ -366,6 +461,7 @@ namespace JC_1_5.Pages
                 Dispatcher.BeginInvoke(() =>
                 {
                     //var profilePictureUrl = string.Format("https://graph.facebook.com/{0}/picture?type={1}&access_token={2}", App.FacebookId, "square", App.AccessToken);
+                    
 
                     name= (string)result["name"];
                     id= (string)result["id"];
@@ -397,7 +493,16 @@ namespace JC_1_5.Pages
             var responseString = await response.Content.ReadAsStringAsync();
             var serializer = new JsonSerializer();
 
+            MessageBox.Show("Gracias por enviar tu comentario", "Gracias", MessageBoxButton.OK);
+
+        
+
+            loadComentarios(true);
+
+
+
         }
+
 
     }
 

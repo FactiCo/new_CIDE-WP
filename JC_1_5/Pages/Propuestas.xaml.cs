@@ -66,8 +66,8 @@ namespace JC_1_5.Pages
 
             var responseString = await response.Content.ReadAsStringAsync();
             lstPropuestas objRespPropuestas = JsonConvert.DeserializeObject<lstPropuestas>(responseString);
-                
-            if (objRespPropuestas.count > 0)
+            objRespPropuestas.items= objRespPropuestas.items.Where(p => p.category == cat).ToList();
+            if (objRespPropuestas.items.Count> 0)
             {
              
                 try
@@ -77,12 +77,10 @@ namespace JC_1_5.Pages
                     dynamic result = await fb.GetTaskAsync("me");
                     var user = new GraphUser(result);
                     
-                    objRespPropuestas.items= objRespPropuestas.items.Where(p => p.category == cat).ToList();
+                    
                     
                     foreach (Propuesta prop in objRespPropuestas.items)
                     {
-                        
-
                      
                         prop.votes.Total = prop.votes.favor.participantes.Count + prop.votes.contra.participantes.Count + prop.votes.abstencion.participantes.Count;
                         
@@ -105,13 +103,52 @@ namespace JC_1_5.Pages
                     }
 
                     lpicker.ItemsSource = objRespPropuestas.items.ToList();
+
                 }
+
+                    
 
                     
                 
                 catch (FacebookOAuthException exception)
                 {
                     MessageBox.Show("Error fetching user data: " + exception.Message);
+                }
+                
+                    
+            }
+            else
+            {
+                lpicker.Visibility = Visibility.Collapsed;
+                switch (lpicker.Name)
+                {
+                    case "lstPropuestas_Trabajo":
+                        lstPropuestas_Trabajo.Visibility = Visibility.Collapsed;
+                        sinPropuestasTrabajo.Visibility = Visibility.Visible;
+                        break;
+                    case "lstPropuestas_Ciudadanos":
+                        lstPropuestas_Ciudadanos.Visibility = Visibility.Collapsed;
+                        sinPropuestasCiudadanos.Visibility = Visibility.Visible;
+                        break;
+                    case "lstPropuestas_Familiar":
+                        
+                        lstPropuestas_Familiar.Visibility = Visibility.Collapsed;
+                        sinPropuestasFamilia.Visibility = Visibility.Visible;
+                        break;
+                    case "lstPropuestas_Empresarios":
+                        lstPropuestas_Empresarios.Visibility = Visibility.Collapsed;
+                        sinPropuestasEmprendedores.Visibility = Visibility.Visible;
+                        break;
+                    case "lstPropuestas_Vecinal":
+
+                        lstPropuestas_Vecinal.Visibility = Visibility.Collapsed;
+                        sinPropuestasVecinal.Visibility = Visibility.Visible;
+                        break;
+                    case "lstPropuestas_Otros":
+                        
+                        lstPropuestas_Otros.Visibility = Visibility.Collapsed;
+                        sinPropuestasOtros.Visibility = Visibility.Visible;
+                        break;
                 }
             }
             
@@ -126,26 +163,9 @@ namespace JC_1_5.Pages
         private void lstPropuestas_Trabajo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Propuesta selectedProp = lstPropuestas_Trabajo.SelectedItem as Propuesta;
-            
-
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
         }
-
-       
-
-        private async void MainPageLoaded(object sender, RoutedEventArgs e)
-        {
-            
-                //this.ExpiryText.Text = string.Format("Login expires on: {0}", session.Expires.ToString());
-
-                //this.ProgressText = "Fetching details from Facebook...";
-                //this.ProgressIsVisible = true;
-
-                
-
-                //this.ProgressText = string.Empty;
-                //this.ProgressIsVisible = false;
-        }
+   
 
         private void lstPropuestas_Familiar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -176,7 +196,7 @@ namespace JC_1_5.Pages
             Propuesta selectedProp = lstPropuestas_Empresarios.SelectedItem as Propuesta;
             
             NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
-
+           
         }
 
         private void lstPropuestas_Vecinal_SelectionChanged(object sender, SelectionChangedEventArgs e)

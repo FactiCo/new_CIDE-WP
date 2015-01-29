@@ -21,170 +21,205 @@
 
     <phone:Panorama>
         <phone:Panorama.Background>
-            <ImageBrush ImageSource="/Assets/Backs/pano_v2.png">    
+            <ImageBrush ImageSource="/Assets/Backs/pano_v2.png">
             </ImageBrush>
         </phone:Panorama.Background>
+
+
+
         
-        <phone:PanoramaItem Header="Contenido">
-            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="Auto">
+
+            <phone:PanoramaItem>
+
+                <phone:PanoramaItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" ></ColumnDefinition>
+                            <ColumnDefinition Width="*" ></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse Width="80" Grid.Column="0" Margin="3,3,3,3" DataContext="this" >
+                            <Ellipse.Fill>
+                            <ImageBrush  x:Name="imgBrsUsr" ImageSource="{Binding this.objPropuesta.author.urlFoto}"  />
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <StackPanel Margin="10,10,5,5" Grid.Column="1"  VerticalAlignment="Center" >
+
+                                    <TextBlock Name="txtUser" VerticalAlignment="Center" DataContext="this"  Text="{Binding this.objPropuesta.author.name}" TextWrapping="Wrap" Foreground="Gray"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Italic.ttf #Source Sans Pro"  />
+
+                        </StackPanel>
+
+                    </Grid>
+                </phone:PanoramaItem.Header>
             <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-
-
-
-                    <TextBlock Grid.Row="0" Name="txtTituloWebView" Text="Titulo"></TextBlock>
-                <phone:WebBrowser Grid.Row="1" IsScriptEnabled="True" Name="browContenido" Loaded="browContenido_Loaded"></phone:WebBrowser>
-            
-
-            <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" >
-
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0" Background="White">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="120" Height="80">
-                            <Image Source="/Assets/Backs/1.png"></Image>
-                            <Button.Background>
-                                <SolidColorBrush Color="LimeGreen"></SolidColorBrush>
-                            </Button.Background>
-                </Button>
-                        <Button Grid.Row="0" Grid.Column="1" Name="btnAbstencion" BorderBrush="Gray" Click="btnAbstencion_Click" Width="120" Height="80">
-                            <Image Source="/Assets/Backs/2.png"></Image>
-                            <Button.Background>
-                                <SolidColorBrush Color="Gray"></SolidColorBrush>
-                            </Button.Background>
-                        </Button>
-                        <Button Grid.Row="0" Grid.Column="2" Name="btnContra"  BorderBrush="Red" Click="btnContra_Click" Width="120" Height="80">
-                            <Image Source="/Assets/Backs/3.png"></Image>
-                            <Button.Background>
-                                <SolidColorBrush Color="Red"></SolidColorBrush>
-                            </Button.Background>
-                        </Button>
-                <TextBlock Grid.ColumnSpan="3" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Name="txtVotados" Text=""></TextBlock>
+                    <Grid Background="White" ScrollViewer.HorizontalScrollBarVisibility="Visible">
 
-                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-                    <TextBlock Name="txtPregunta" Text="¿Pregunta?" TextWrapping="Wrap"></TextBlock>
-                    <ListBox Name="lstRespuestas" SelectionChanged="lstRespuestas_SelectionChanged">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="500"/>
+                            <RowDefinition Height="150"/>
+                            <RowDefinition Height="400"/>
+                        </Grid.RowDefinitions>
 
+                        <TextBlock TextWrapping="Wrap" FontSize="30" Margin="5,5,5,5" Text="{Binding this.objPropuesta.title}" Foreground="Gray"  Grid.Row="0" x:Name="txtTituloWebView"  FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" DataContext="this" />
+
+
+                        <phone:WebBrowser Background="White" HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch"
+                              VerticalContentAlignment="Center" 
+                              HorizontalContentAlignment="Center" Grid.Row="1" IsScriptEnabled="True" x:Name="browContenido" Loaded="browContenido_Loaded"/>
+
+                        <Grid Grid.Row="2" HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.ColumnSpan="3" Grid.Row="0" Foreground="Black" Text="Vota esta propuesta:"/>
+                            <Button Grid.Row="1" Grid.Column="0" x:Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="120" Height="80" Background="LimeGreen">
+                                <Image Source="/Assets/Backs/1.png"/>
+                            </Button>
+                            <Button Grid.Row="1" Grid.Column="1" x:Name="btnAbstencion" BorderBrush="Gray" Click="btnAbstencion_Click" Width="120" Height="80" Background="Gray">
+                                <Image Source="/Assets/Backs/2.png"/>
+                            </Button>
+
+                            <Button Grid.Row="1" Grid.Column="2" x:Name="btnContra"  BorderBrush="Red" Click="btnContra_Click" Width="120" Height="80" Background="Red">
+                                <Image Source="/Assets/Backs/3.png"/>
+                            </Button>
+
+                            <TextBlock Text="Votos" Grid.ColumnSpan="3" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2" Foreground="Black" x:Name="txtVotados" />
+                        </Grid>
+
+                        <Grid x:Name="grdPregunta" Visibility="Collapsed" Background="#F2F2F2" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="20,10,20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="120"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="LimeGreen">
+                                <TextBlock Text="¿?" TextAlignment="Center" VerticalAlignment="Top"  Foreground="White" FontSize="35" />
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="1" Grid.Row="0">
+                                <TextBlock  x:Name="txtPregunta" Foreground="Black"  Text="" Margin="30,40,30,10" TextAlignment="Center" TextWrapping="Wrap" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"/>
+                            </StackPanel>
+
+                            <ListBox  Grid.Row="1" Grid.Column="1" Margin="10,10,10,10"  x:Name="lstRespuestas" SelectionChanged="lstRespuestas_SelectionChanged" VerticalAlignment="Center">
                                 <ListBox.ItemTemplate>
-
                                     <DataTemplate>
-
-                                        <Grid >
+                                        <Grid VerticalAlignment="Center" Margin="5,5,5,5">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.3*"></ColumnDefinition>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-
-
                                             <Ellipse Grid.Column="0" Canvas.Left="50" Canvas.Top="50" Width="20" Height="20" Stroke="Black" StrokeThickness="1">
                                                 <Ellipse.Fill>
-                                                    <SolidColorBrush Color="Blue"></SolidColorBrush>
+                                                    <SolidColorBrush Color="{Binding ColorBrush}"/>
                                                 </Ellipse.Fill>
                                             </Ellipse>
-                                            
-                                            <TextBlock Foreground="Black" Grid.Column="1" Text="{Binding title}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Black.ttf #Source Sans Pro"></TextBlock>
-                                            
+                                            <TextBlock FontSize="25" Foreground="Black" Grid.Column="1" Text="{Binding title}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf #Source Sans Pro"/>
                                         </Grid>
-
                                     </DataTemplate>
-
                                 </ListBox.ItemTemplate>
 
                             </ListBox>
-                </Grid>
-                        <amCharts:PieChart Grid.ColumnSpan="3" Grid.Column="0" Width="200" Height="200" Grid.Row="3" Name="chrtPie" TitleMemberPath="Title" ValueMemberPath="Value">
-                            
 
-                                        <amCharts:PieChart.Brushes>
-                                <SolidColorBrush Color="#4A8293"></SolidColorBrush>
-                                <SolidColorBrush Color="#189A8E"></SolidColorBrush>
-                                <SolidColorBrush Color="#58CA8F"></SolidColorBrush>
-                                <SolidColorBrush Color="#34CA67"></SolidColorBrush>
+                        </Grid>
 
 
-                            </amCharts:PieChart.Brushes>
-                            
-                        </amCharts:PieChart>
+                        <Grid Grid.Row="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Visibility="Collapsed" Name="txtPreguntaVis" Foreground="Black"  Text=""  TextAlignment="Center" TextWrapping="Wrap" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"/>
+                            <amCharts:PieChart Grid.Row="1" LegendVisibility="Visible" Visibility="Collapsed"  Width="300" Height="300"  x:Name="chrtPie" TitleMemberPath="Title" ValueMemberPath="Value">
 
-                        <amCharts:PieChart Grid.Row="3" Name="pie1" TitleMemberPath="Title" ValueMemberPath="Value">
-                            <amCharts:PieChart.Brushes>
-                                <RadialGradientBrush GradientOrigin="0,0" Center="0,0" RadiusX="1" RadiusY="1">
-                                    <GradientStop Offset="0" Color="#FFeeee" />
-                                    <GradientStop Offset="1" Color="#FF0000" />
-                                </RadialGradientBrush>
-                                <RadialGradientBrush GradientOrigin="0,0" Center="0,0">
-                                    <GradientStop Offset="0" Color="#eeffee" />
-                                    <GradientStop Offset="1" Color="#00ff00" />
-                                </RadialGradientBrush>
-                            </amCharts:PieChart.Brushes>
-                        </amCharts:PieChart>
+                                <amCharts:PieChart.Brushes>
+                                    <SolidColorBrush Color="#4A8293"/>
+                                    <SolidColorBrush Color="#189A8E"/>
+                                    <SolidColorBrush Color="#58CA8F"/>
+                                    <SolidColorBrush Color="#34CA67"/>
+                                </amCharts:PieChart.Brushes>
+                            </amCharts:PieChart>
 
+                        </Grid>
+                        
                     </Grid>
-            </Grid>
-                
-                
-            </ScrollViewer>
 
+                </ScrollViewer>
+            </Grid>
         </phone:PanoramaItem>
-        
-        
-        
-        <phone:PanoramaItem Header="Argumenta">
+
+
+
+
+
+
+
+        <phone:PanoramaItem >
+            <phone:PanoramaItem.Header>
+                <TextBlock Text="Argumenta" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"></TextBlock>
+            </phone:PanoramaItem.Header>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.2*"/>
                 </Grid.RowDefinitions>
-                <ListBox Name="lstArgumenta" Grid.Row="0" Background="White">
-                <ListBox.ItemTemplate>
+                <ListBox x:Name="lstArgumenta" Grid.Row="0" Background="White">
+                    <ListBox.ItemTemplate>
 
                         <DataTemplate>
 
                             <Grid >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="60"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Grid.Row="0" Width="50" Height="50" Source="{Binding from.urlFoto}" Margin="5,5,5,5"></Image>
-                                <TextBlock Foreground="Black" Grid.Column="1" Grid.Row="0" Text="{Binding from.name}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Black.ttf #Source Sans Pro"></TextBlock>
-                                <TextBlock Foreground="Black" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Text="{Binding message}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf #Source Sans Pro"></TextBlock>
+                                <Image Grid.Column="0" Grid.Row="0" Width="50" Height="50" Source="{Binding from.urlFoto}" Margin="5,5,5,5"/>
+                                <TextBlock Foreground="Black" Grid.Column="1" Grid.Row="0" Text="{Binding from.name}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Black.ttf #Source Sans Pro"/>
+                                <TextBlock Foreground="Black" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Text="{Binding message}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf #Source Sans Pro"/>
                             </Grid>
 
                         </DataTemplate>
 
                     </ListBox.ItemTemplate>
-                
-            </ListBox>
-                
+
+                </ListBox>
+
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Name="txtArgumento" Grid.Column="0"></TextBox>
-                    <Button Name="btnEnviar" Grid.Column="1" Content="Enviar" Background="#4A8293" BorderBrush="#4A8293" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Light.ttf #Roboto Slab" Click="btnEnviar_Click" ></Button>
+                    <TextBox x:Name="txtArgumento" Grid.Column="0"/>
+                    <Button x:Name="btnEnviar" Grid.Column="1" Content="Enviar" Background="#4A8293" BorderBrush="#4A8293" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Light.ttf #Roboto Slab" Click="btnEnviar_Click" />
                 </Grid>
             </Grid>
 
         </phone:PanoramaItem>
+
     </phone:Panorama>
-    
+
 </phone:PhoneApplicationPage>

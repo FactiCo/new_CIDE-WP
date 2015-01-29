@@ -15,13 +15,13 @@
     shell:SystemTray.IsVisible="True">
 
         <!--Control Pivot-->
-    <phone:Pivot Title="Propuestas" Name="pvtCats" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  >
-       
-        
-            <phone:Pivot.Background>
-                <ImageBrush ImageSource="/Assets/Backs/pano_v2.png"></ImageBrush>
-            </phone:Pivot.Background>
-
+    <phone:Pivot Name="pvtCats" Foreground="White" >
+        <phone:Pivot.Title>
+            <TextBlock Text="Propuestas de justicia" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" VerticalAlignment="Center" Margin="18,0,5,5" ></TextBlock>
+        </phone:Pivot.Title>
+        <phone:Pivot.Background>
+            <ImageBrush ImageSource="/Assets/Backs/pano_v2.png"></ImageBrush>
+        </phone:Pivot.Background>
         <phone:PivotItem Name="Trabajo" Loaded="Trabajo_Loaded">
             <phone:PivotItem.Header>
                 <Grid>
@@ -31,47 +31,68 @@
                     </Grid.ColumnDefinitions>
                     
                     <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_TRABAJO_TRANS.png" Width="60" Height="60"></Image>
-                    <TextBlock Text="Trabajo" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                    <TextBlock Text="Trabajo" Grid.Column="1" Width="Auto"  Foreground="White" FontSize="45" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
-            <ListBox  Name="lstPropuestas_Trabajo" SelectionChanged="lstPropuestas_Trabajo_SelectionChanged" DataContext="JC_1_5.Code.Entities.Propuesta" Background="White" >
-                <ListBox.ItemTemplate>
+
+            <Grid>
+                <StackPanel>
+                    <TextBlock Name="sinPropuestasTrabajo" Text="Sin propuestas en esta categoría" FontSize="40" TextWrapping="Wrap" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" Visibility="Collapsed" Margin="20,20,20,20" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+
+                <ListBox Margin="20,0,20,0" Name="lstPropuestas_Trabajo" SelectionChanged="lstPropuestas_Trabajo_SelectionChanged" DataContext="JC_1_5.Code.Entities.Propuesta" Background="White" Height="Auto" >
+                    
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    
+                    <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <Grid Margin="10,10,10,10" Background="White">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.2*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.7*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.1*" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Image Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding author.urlFoto}" Width="80" Height="80" Stretch="Uniform" ></Image>
-                                <TextBlock Margin="10,10,10,10" Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black"  />
-                                <Image VerticalAlignment="Center" Margin="10,10,10,10" Grid.Row="0" Grid.Column="2" Name="imgGo" Source="/Assets/Icons/siguiente.png"></Image>
+                            <Border BorderBrush="LimeGreen" BorderThickness="1" Margin="0,0,0,0">
+                                <Grid Background="White" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" ></ColumnDefinition>
+                                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="45" ></RowDefinition>
+                                    </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2F2F2" >
-                                    <RichTextBox Width="Auto" Height="Auto" Margin="10,10,10,10"  HorizontalAlignment="Right" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" >
-                                        <Paragraph>
-                                            <InlineUIContainer>
-                                                <TextBlock Text="Votos hasta ahora: "></TextBlock>
-                                            </InlineUIContainer>
+                                    <Ellipse Width="80" Height="80" Margin="3,3,3,3" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding author.urlFoto}"  />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
 
-                                            <InlineUIContainer>
-                                                <TextBlock   Text="{Binding votes.Total}"></TextBlock>
-                                            </InlineUIContainer>
-                                        </Paragraph>
-                                    </RichTextBox>
+                                    <TextBlock Margin="10,10,5,5" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  />
+
+
+
+                                    <Grid Background="#F2F2F2"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                                        <RichTextBox Margin="0,10,0,10"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Light.ttf #Source Sans Pro" Foreground="Black"  >
+                                            <Paragraph>
+                                                <InlineUIContainer>
+                                                    <TextBlock Text="Votos hasta ahora: "></TextBlock>
+                                                </InlineUIContainer>
+
+                                                <InlineUIContainer>
+                                                    <TextBlock   Text="{Binding votes.Total}"></TextBlock>
+                                                </InlineUIContainer>
+                                            </Paragraph>
+                                        </RichTextBox>
+                                    </Grid>
+                                    
+                                    
+
                                 </Grid>
-                                
-                                
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
+                            </Border>
+                        </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            </Grid>
         </phone:PivotItem>
 
 
@@ -84,48 +105,70 @@
                         <ColumnDefinition Width="*" ></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_CIUDADANOS_TRANS.png" Width="60" Height="60" Stretch="Uniform"></Image>
-                    <TextBlock Text="Ciudadanos" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                    <TextBlock Text="Ciudadanos" Grid.Column="1" Width="Auto" Foreground="White" FontSize="45" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
+            
+            <Grid>
 
-            <ListBox  Name="lstPropuestas_Ciudadanos" Background="White" SelectionChanged="lstPropuestas_Ciudadanos_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Grid Margin="10,10,10,10" Background="White">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.2*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.7*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.1*" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Image Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding author.urlFoto}" Width="80" Height="80" Stretch="Uniform" ></Image>
-                                <TextBlock Margin="10,10,10,10" Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black"  />
-                                <Image VerticalAlignment="Center" Margin="10,10,10,10" Grid.Row="0" Grid.Column="2" Name="imgGo" Source="/Assets/Icons/siguiente.png"></Image>
 
-                                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2F2F2" >
-                                    <RichTextBox Width="Auto" Height="Auto" Margin="10,10,10,10"  HorizontalAlignment="Right" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" >
-                                        <Paragraph>
-                                            <InlineUIContainer>
-                                                <TextBlock Text="Votos hasta ahora: "></TextBlock>
-                                            </InlineUIContainer>
+                <StackPanel>
+                    <TextBlock Name="sinPropuestasCiudadanos" Text="Sin propuestas en esta categoría" FontSize="40" TextWrapping="Wrap" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" Visibility="Collapsed" Margin="20,20,20,20" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+                
+                <ListBox Margin="20,0,20,0" Name="lstPropuestas_Ciudadanos" Background="White" SelectionChanged="lstPropuestas_Ciudadanos_SelectionChanged" Height="Auto">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
 
-                                            <InlineUIContainer>
-                                                <TextBlock Text="{Binding votes.Total}"></TextBlock>
-                                            </InlineUIContainer>
-                                        </Paragraph>
-                                    </RichTextBox>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LimeGreen" BorderThickness="1" Margin="0,0,0,0">
+                                <Grid Background="White" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" ></ColumnDefinition>
+                                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="45" ></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Ellipse Width="80" Height="80" Margin="3,3,3,3" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding author.urlFoto}"  />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <TextBlock Margin="10,10,5,5" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  />
+
+
+
+                                    <Grid Background="#F2F2F2"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                                        <RichTextBox Margin="0,10,0,10"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Light.ttf #Source Sans Pro" Foreground="Black"  >
+                                            <Paragraph>
+                                                <InlineUIContainer>
+                                                    <TextBlock Text="Votos hasta ahora: "></TextBlock>
+                                                </InlineUIContainer>
+
+                                                <InlineUIContainer>
+                                                    <TextBlock   Text="{Binding votes.Total}"></TextBlock>
+                                                </InlineUIContainer>
+                                            </Paragraph>
+                                        </RichTextBox>
+                                    </Grid>
+
+
+
                                 </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
-
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            </Grid>
         </phone:PivotItem>
 
         <phone:PivotItem Name="Familiar">
@@ -137,48 +180,67 @@
                     <ColumnDefinition Width="*" ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_FAMILIA_TRANS.png" Width="60" Height="60"></Image>
-                <TextBlock Text="Familia" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                    <TextBlock Text="Familia" Grid.Column="1" Width="Auto" Foreground="White" FontSize="45" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
             </Grid>
             </phone:PivotItem.Header>
+            <Grid>
 
-            <ListBox  Name="lstPropuestas_Familiar" SelectionChanged="lstPropuestas_Familiar_SelectionChanged" Background="White">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Grid Margin="10,10,10,10" Background="White">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.2*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.7*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.1*" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Image Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding author.urlFoto}" Width="80" Height="80" Stretch="Uniform" ></Image>
-                                <TextBlock Margin="10,10,10,10" Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black"  />
-                                <Image VerticalAlignment="Center" Margin="10,10,10,10" Grid.Row="0" Grid.Column="2" Name="imgGo" Source="/Assets/Icons/siguiente.png"></Image>
+                <StackPanel>
+                    <TextBlock Name="sinPropuestasFamilia" Text="Sin propuestas en esta categoría" FontSize="40" TextWrapping="Wrap" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" Visibility="Collapsed" Margin="20,20,20,20" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
 
-                                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2F2F2" >
-                                    <RichTextBox Width="Auto" Height="Auto" Margin="10,10,10,10"  HorizontalAlignment="Right" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" >
-                                        <Paragraph>
-                                            <InlineUIContainer>
-                                                <TextBlock Text="Votos hasta ahora: "></TextBlock>
-                                            </InlineUIContainer>
+                <ListBox Margin="20,0,20,0" Name="lstPropuestas_Familiar" SelectionChanged="lstPropuestas_Familiar_SelectionChanged" Background="White" Height="Auto">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
 
-                                            <InlineUIContainer>
-                                                <TextBlock   Text="{Binding votes.Total}"></TextBlock>
-                                            </InlineUIContainer>
-                                        </Paragraph>
-                                    </RichTextBox>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LimeGreen" BorderThickness="1" Margin="0,0,0,0">
+                                <Grid Background="White" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" ></ColumnDefinition>
+                                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="45" ></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Ellipse Width="80" Height="80" Margin="3,3,3,3" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding author.urlFoto}"  />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <TextBlock Margin="10,10,5,5" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  />
+
+
+
+                                    <Grid Background="#F2F2F2"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                                        <RichTextBox Margin="0,10,0,10"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Light.ttf #Source Sans Pro" Foreground="Black"  >
+                                            <Paragraph>
+                                                <InlineUIContainer>
+                                                    <TextBlock Text="Votos hasta ahora: "></TextBlock>
+                                                </InlineUIContainer>
+
+                                                <InlineUIContainer>
+                                                    <TextBlock   Text="{Binding votes.Total}"></TextBlock>
+                                                </InlineUIContainer>
+                                            </Paragraph>
+                                        </RichTextBox>
+                                    </Grid>
+
+
+
                                 </Grid>
-
-
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </phone:PivotItem>
 
         <phone:PivotItem Name="Empresarios" >
@@ -190,47 +252,69 @@
                         <ColumnDefinition Width="*" ></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_EMPRENDEDORES_TRANS.png" Width="60" Height="60"></Image>
-                    <TextBlock Text="Emprendedores" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                    <TextBlock Text="Emprendedores" Grid.Column="1" Width="Auto"  Foreground="White" FontSize="45" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
-            <ListBox  Name="lstPropuestas_Empresarios" Background="White" SelectionChanged="lstPropuestas_Empresarios_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Grid Margin="10,10,10,10" Background="White">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.2*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.7*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.1*" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Image Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding author.urlFoto}" Width="80" Height="80" Stretch="Uniform" ></Image>
-                                <TextBlock Margin="10,10,10,10" Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black"  />
-                                <Image VerticalAlignment="Center" Margin="10,10,10,10" Grid.Row="0" Grid.Column="2" Name="imgGo" Source="/Assets/Icons/siguiente.png"></Image>
 
-                                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2F2F2" >
-                                    <RichTextBox Width="Auto" Height="Auto" Margin="10,10,10,10"  HorizontalAlignment="Right" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" >
-                                        <Paragraph>
-                                            <InlineUIContainer>
-                                                <TextBlock Text="Votos hasta ahora: "></TextBlock>
-                                            </InlineUIContainer>
+            <Grid>
 
-                                            <InlineUIContainer>
-                                                <TextBlock   Text="{Binding votes.Total}"></TextBlock>
-                                            </InlineUIContainer>
-                                        </Paragraph>
-                                    </RichTextBox>
+
+                <StackPanel>
+                    <TextBlock Name="sinPropuestasEmprendedores" Text="Sin propuestas en esta categoría" FontSize="40" TextWrapping="Wrap" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" Visibility="Collapsed" Margin="20,20,20,20" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+
+                <ListBox Margin="20,0,20,0" Name="lstPropuestas_Empresarios" Background="White" SelectionChanged="lstPropuestas_Empresarios_SelectionChanged" Height="Auto">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LimeGreen" BorderThickness="1" Margin="0,0,0,0">
+                                <Grid Background="White" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" ></ColumnDefinition>
+                                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="45" ></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Ellipse Width="80" Height="80" Margin="3,3,3,3" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding author.urlFoto}"  />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <TextBlock Margin="10,10,5,5" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  />
+
+
+
+                                    <Grid Background="#F2F2F2"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                                        <RichTextBox Margin="0,10,0,10"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Light.ttf #Source Sans Pro" Foreground="Black"  >
+                                            <Paragraph>
+                                                <InlineUIContainer>
+                                                    <TextBlock Text="Votos hasta ahora: "></TextBlock>
+                                                </InlineUIContainer>
+
+                                                <InlineUIContainer>
+                                                    <TextBlock   Text="{Binding votes.Total}"></TextBlock>
+                                                </InlineUIContainer>
+                                            </Paragraph>
+                                        </RichTextBox>
+                                    </Grid>
+
+
+
                                 </Grid>
-
-
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </phone:PivotItem>
 
 
@@ -242,47 +326,67 @@
                         <ColumnDefinition Width="*" ></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_VECINAL_TRANS.png" Width="60" Height="60"></Image>
-                    <TextBlock Text="Vecinal" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                    <TextBlock Text="Vecinal" Grid.Column="1" Width="Auto"  Foreground="White" FontSize="45" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
-            <ListBox  Name="lstPropuestas_Vecinal" Background="White" SelectionChanged="lstPropuestas_Vecinal_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Grid Margin="10,10,10,10" Background="White">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.2*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.7*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.1*" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Image Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding author.urlFoto}" Width="80" Height="80" Stretch="Uniform" ></Image>
-                                <TextBlock Margin="10,10,10,10" Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black"  />
-                                <Image VerticalAlignment="Center" Margin="10,10,10,10" Grid.Row="0" Grid.Column="2" Name="imgGo" Source="/Assets/Icons/siguiente.png"></Image>
+            <Grid>
 
-                                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2F2F2" >
-                                    <RichTextBox Width="Auto" Height="Auto" Margin="10,10,10,10"  HorizontalAlignment="Right" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" >
-                                        <Paragraph>
-                                            <InlineUIContainer>
-                                                <TextBlock Text="Votos hasta ahora: "></TextBlock>
-                                            </InlineUIContainer>
+                <StackPanel>
+                    <TextBlock Name="sinPropuestasVecinal" Text="Sin propuestas en esta categoría" FontSize="40" TextWrapping="Wrap" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" Visibility="Collapsed" Margin="20,20,20,20" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
 
-                                            <InlineUIContainer>
-                                                <TextBlock   Text="{Binding votes.Total}"></TextBlock>
-                                            </InlineUIContainer>
-                                        </Paragraph>
-                                    </RichTextBox>
+                <ListBox Margin="20,0,20,0"  Name="lstPropuestas_Vecinal" Background="White" SelectionChanged="lstPropuestas_Vecinal_SelectionChanged" Height="Auto">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LimeGreen" BorderThickness="1" Margin="0,0,0,0">
+                                <Grid Background="White" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" ></ColumnDefinition>
+                                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="45" ></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Ellipse Width="80" Height="80" Margin="3,3,3,3" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding author.urlFoto}"  />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <TextBlock Margin="10,10,5,5" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  />
+
+
+
+                                    <Grid Background="#F2F2F2"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                                        <RichTextBox Margin="0,10,0,10"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Light.ttf #Source Sans Pro" Foreground="Black"  >
+                                            <Paragraph>
+                                                <InlineUIContainer>
+                                                    <TextBlock Text="Votos hasta ahora: "></TextBlock>
+                                                </InlineUIContainer>
+
+                                                <InlineUIContainer>
+                                                    <TextBlock   Text="{Binding votes.Total}"></TextBlock>
+                                                </InlineUIContainer>
+                                            </Paragraph>
+                                        </RichTextBox>
+                                    </Grid>
+
+
+
                                 </Grid>
-
-
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </phone:PivotItem>
 
         <phone:PivotItem Name="Otros" >
@@ -293,48 +397,70 @@
                         <ColumnDefinition Width="*" ></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image VerticalAlignment="Center" Grid.Column="0" Source="/Assets/Icons/ICONO_JUSTICIA_OTROS_TRANS.png" Width="60" Height="60"></Image>
-                    <TextBlock Text="Otros" Grid.Column="1" Width="Auto"  Foreground="Black" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                    <TextBlock Text="Otros" Grid.Column="1" Width="Auto"  Foreground="White" FontSize="45" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
             </phone:PivotItem.Header>
 
-            <ListBox  Name="lstPropuestas_Otros" Background="White" SelectionChanged="lstPropuestas_Otros_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Grid Margin="10,10,10,10" Background="White">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.2*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.7*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="0.1*" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Image Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Name="imgCat" Source="{Binding author.urlFoto}" Width="80" Height="80" Stretch="Uniform" ></Image>
-                                <TextBlock Margin="10,10,10,10" Grid.Row="0" Grid.Column="1" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black"  />
-                                <Image VerticalAlignment="Center" Margin="10,10,10,10" Grid.Row="0" Grid.Column="2" Name="imgGo" Source="/Assets/Icons/siguiente.png"></Image>
+            <Grid>
 
-                                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#F2F2F2" >
-                                    <RichTextBox Width="Auto" Height="Auto" Margin="10,10,10,10"  HorizontalAlignment="Right" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" >
-                                        <Paragraph>
-                                            <InlineUIContainer>
-                                                <TextBlock Text="Votos hasta ahora: "></TextBlock>
-                                            </InlineUIContainer>
 
-                                            <InlineUIContainer>
-                                                <TextBlock   Text="{Binding votes.Total}"></TextBlock>
-                                            </InlineUIContainer>
-                                        </Paragraph>
-                                    </RichTextBox>
+                <StackPanel>
+                    <TextBlock  Name="sinPropuestasOtros" Text="Sin propuestas en esta categoría" FontSize="40" TextWrapping="Wrap" Foreground="White" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" Visibility="Collapsed" Margin="20,20,20,20" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+
+
+                <ListBox  Name="lstPropuestas_Otros" Background="White" SelectionChanged="lstPropuestas_Otros_SelectionChanged" Height="Auto" Margin="20,0,20,0">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="LimeGreen" BorderThickness="1" Margin="0,0,0,0">
+                                <Grid Background="White" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" ></ColumnDefinition>
+                                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="45" ></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Ellipse Width="80" Height="80" Margin="3,3,3,3" >
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding author.urlFoto}"  />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <TextBlock Margin="10,10,5,5" Grid.Row="0" Grid.Column="1"  VerticalAlignment="Center" Name="Titulo" Text="{Binding title}" TextWrapping="Wrap" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  />
+
+
+
+                                    <Grid Background="#F2F2F2"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                                        <RichTextBox Margin="0,10,0,10"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Light.ttf #Source Sans Pro" Foreground="Black"  >
+                                            <Paragraph>
+                                                <InlineUIContainer>
+                                                    <TextBlock Text="Votos hasta ahora: "></TextBlock>
+                                                </InlineUIContainer>
+
+                                                <InlineUIContainer>
+                                                    <TextBlock   Text="{Binding votes.Total}"></TextBlock>
+                                                </InlineUIContainer>
+                                            </Paragraph>
+                                        </RichTextBox>
+                                    </Grid>
+
+
+
                                 </Grid>
-
-
-                            </Grid>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </phone:PivotItem>
 
 

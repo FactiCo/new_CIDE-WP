@@ -59,6 +59,9 @@
                         </phone:PivotItem.Header>
                         <phone:PivotItem.Background>
                             <ImageBrush ImageSource="/Assets/Infografia/QUE_ES_JC_1.png" Stretch="Uniform">
+                                <ImageBrush.RelativeTransform>
+                                    <ScaleTransform ScaleX="1.3" ScaleY="1.3" CenterX=".5" CenterY=".8"  ></ScaleTransform>
+                                </ImageBrush.RelativeTransform>
                             </ImageBrush>
                         </phone:PivotItem.Background>
                     </phone:PivotItem>
@@ -73,6 +76,9 @@
                         </phone:PivotItem.Header>
                         <phone:PivotItem.Background>
                             <ImageBrush ImageSource="/Assets/Infografia/QUE_ES_JC_2.png" Stretch="Uniform">
+                                <ImageBrush.RelativeTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" CenterX=".5" CenterY=".5"  ></ScaleTransform>
+                                </ImageBrush.RelativeTransform>
                             </ImageBrush>
                         </phone:PivotItem.Background>
                     </phone:PivotItem>
@@ -86,7 +92,12 @@
                             </Grid>
                         </phone:PivotItem.Header>
                         <phone:PivotItem.Background>
-                            <ImageBrush ImageSource="/Assets/Infografia/QUE_ES_JC_3.png" Stretch="Uniform">
+                            <ImageBrush ImageSource="/Assets/Infografia/QUE_ES_JC_3.png" Stretch="Uniform" >
+                                <ImageBrush.RelativeTransform>
+                                    <ScaleTransform ScaleX="1.3" CenterX=".5" CenterY=".5"  ScaleY="1.3"></ScaleTransform>
+                                    
+                                    
+                                </ImageBrush.RelativeTransform>
                             </ImageBrush>
                         </phone:PivotItem.Background>
                     </phone:PivotItem>
@@ -102,6 +113,9 @@
                         </phone:PivotItem.Header>
                         <phone:PivotItem.Background>
                             <ImageBrush ImageSource="/Assets/Infografia/QUE_ES_JC_4.png" Stretch="Uniform">
+                                <ImageBrush.RelativeTransform>
+                                    <ScaleTransform ScaleX="1.5" CenterX=".5" CenterY=".5"  ScaleY="1.5"></ScaleTransform>
+                                </ImageBrush.RelativeTransform>
                             </ImageBrush>
                         </phone:PivotItem.Background>
                     </phone:PivotItem>
@@ -118,6 +132,9 @@
                         </phone:PivotItem.Header>
                         <phone:PivotItem.Background>
                             <ImageBrush ImageSource="/Assets/Infografia/QUE_ES_JC_5.png" Stretch="Uniform">
+                                <ImageBrush.RelativeTransform>
+                                    <ScaleTransform ScaleX="1.15" ScaleY="1.15" CenterX=".5" CenterY=".5"  ></ScaleTransform>
+                                </ImageBrush.RelativeTransform>
                             </ImageBrush>
                         </phone:PivotItem.Background>
                     </phone:PivotItem>
