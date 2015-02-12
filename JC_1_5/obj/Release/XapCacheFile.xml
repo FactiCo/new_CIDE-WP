@@ -1,5 +1,5 @@
-﻿<xapCache source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\Justicia Cotidiana.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="29/01/2015 08:19:12 a. m.">
-  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Release\JC_1_5.dll" archivePath="JC_1_5.dll" lastWriteTime="29/01/2015 08:19:04 a. m." />
+﻿<xapCache source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\Justicia Cotidiana.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="12/02/2015 04:54:59 a. m.">
+  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Release\JC_1_5.dll" archivePath="JC_1_5.dll" lastWriteTime="12/02/2015 04:54:45 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\Backs\1.png" archivePath="Assets\Backs\1.png" lastWriteTime="22/01/2015 07:59:59 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\Backs\2.png" archivePath="Assets\Backs\2.png" lastWriteTime="22/01/2015 08:00:11 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\Backs\3.png" archivePath="Assets\Backs\3.png" lastWriteTime="22/01/2015 08:00:20 a. m." />
@@ -59,12 +59,13 @@
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="19/01/2015 03:45:33 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="19/01/2015 03:45:33 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\README_FIRST.txt" archivePath="README_FIRST.txt" lastWriteTime="29/01/2015 08:14:47 a. m." />
+  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\SplashScreenImage.jpg" archivePath="SplashScreenImage.jpg" lastWriteTime="06/01/2015 07:52:22 p. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Toolkit.Content\ApplicationBar.Add.png" archivePath="Toolkit.Content\ApplicationBar.Add.png" lastWriteTime="29/01/2015 08:14:47 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Toolkit.Content\ApplicationBar.Cancel.png" archivePath="Toolkit.Content\ApplicationBar.Cancel.png" lastWriteTime="29/01/2015 08:14:47 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Toolkit.Content\ApplicationBar.Check.png" archivePath="Toolkit.Content\ApplicationBar.Check.png" lastWriteTime="29/01/2015 08:14:47 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Toolkit.Content\ApplicationBar.Delete.png" archivePath="Toolkit.Content\ApplicationBar.Delete.png" lastWriteTime="29/01/2015 08:14:47 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Toolkit.Content\ApplicationBar.Select.png" archivePath="Toolkit.Content\ApplicationBar.Select.png" lastWriteTime="29/01/2015 08:14:47 a. m." />
-  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="29/01/2015 08:09:11 a. m." />
+  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="12/02/2015 04:54:55 a. m." />
   <file source="C:\Users\Mario\documents\Visual Studio 2012\Projects\slnJusticiaCotidiana\packages\amChartsQuickCharts.1.1\lib\sl3-wp\AmCharts.Windows.QuickCharts.WP.dll" archivePath="AmCharts.Windows.QuickCharts.WP.dll" lastWriteTime="29/01/2015 07:45:04 a. m." />
   <file source="C:\Users\Mario\documents\Visual Studio 2012\Projects\slnJusticiaCotidiana\packages\Facebook.Client.0.9.1-alpha\lib\wp8\Facebook.Client.dll" archivePath="Facebook.Client.dll" lastWriteTime="22/01/2015 02:21:26 a. m." />
   <file source="C:\Users\Mario\documents\Visual Studio 2012\Projects\slnJusticiaCotidiana\packages\Facebook.6.4.2\lib\wp8\Facebook.dll" archivePath="Facebook.dll" lastWriteTime="22/01/2015 02:54:35 a. m." />
@@ -86,5 +87,5 @@
   <file source="C:\Users\Mario\documents\Visual Studio 2012\Projects\slnJusticiaCotidiana\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.xml" archivePath="System.Net.Http.Primitives.xml" lastWriteTime="29/01/2015 07:41:57 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\StoreImgs\2.png" archivePath="Assets\StoreImgs\2.png" lastWriteTime="29/01/2015 06:37:29 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\StoreImgs\300.png" archivePath="Assets\StoreImgs\300.png" lastWriteTime="29/01/2015 06:37:00 a. m." />
-  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="29/01/2015 08:09:11 a. m." />
+  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="12/02/2015 04:54:55 a. m." />
 </xapCache>

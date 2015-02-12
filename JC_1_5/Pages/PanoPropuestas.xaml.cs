@@ -38,25 +38,20 @@ namespace JC_1_5.Pages
 
             InitializeComponent();
 
-            objComentarioAdd = new commentToPost();
+            
 
+            objComentarioAdd = new commentToPost();
 
             objPropuesta = new Propuesta();
             sessionStg = SessionStorage.Load();
 
-
-
-
             clientFB = new FacebookClient(sessionStg.AccessToken);
 
-            
-           
             LoadUserInfo();
 
             
 
-           
-            
+
         }
 
        
@@ -64,6 +59,7 @@ namespace JC_1_5.Pages
 
 
         string idPropRequest;
+        string idPropToLoad;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
@@ -87,19 +83,16 @@ namespace JC_1_5.Pages
                 HttpClient objFotoDown = new HttpClient();
                 var respImage = await objFotoDown.GetAsync(profilePictureUrl);
 
-                this.objPropuesta.author.urlFoto = respImage.RequestMessage.RequestUri;
-               
-                
+                imgBrsUsr.ImageSource=new System.Windows.Media.Imaging.BitmapImage(respImage.RequestMessage.RequestUri);
 
             }
             else
             {
-                objPropuesta.author.urlFoto = new Uri(@"/Assets/Icons/JC_IconoGrande.png", UriKind.Relative);
-                
+                imgBrsUsr.ImageSource = new System.Windows.Media.Imaging.BitmapImage(new Uri(@"/Assets/Icons/JC_IconoGrande.png", UriKind.Relative));
                 
             }
         }
-
+        string txtWebBorw;
         private async void loadPropuesta(string uidProp)
         {
 
@@ -114,14 +107,16 @@ namespace JC_1_5.Pages
             this.objPropuesta = objRespPropuestas.items.First(p=>p._id==uidProp);
 
             loadFBPhoto();
+            txtTitulo.Text = objPropuesta.title;
+            
 
-            txtTituloWebView.Text = objPropuesta.title;
+            txtWebBorw = this.objPropuesta.description.Replace(@"//www.youtube.com", @"http://www.youtube.com");
 
-            string txtWebBorw = this.objPropuesta.description.Replace(@"//www.youtube.com", @"http://www.youtube.com");
+            browContenido.NavigateToString("<!doctype html><html><head><style>img {width: 100%;height: auto;} iframe {width:100%; height:500px !important;}</style></head><body onLoad=window.external.notify('rendered_height='+document.getElementById('content').scrollHeight);><div id='content'>" + txtWebBorw + "</div></body></html>");
+            
+            txtAutor.Text = objPropuesta.author.name;
 
-            browContenido.NavigateToString("<!doctype html><html><head><style>img {width: 100%;height: auto;} iframe {width:100%; height:500px !important;}</style></head><body>" + txtWebBorw + "</body></html>"); 
 
-            txtTituloWebView.Text = objPropuesta.title;
             string currCategory = objPropuesta.category;
             if (objPropuesta.question.title!=null)
             {
@@ -144,6 +139,7 @@ namespace JC_1_5.Pages
                     
                     
                     chrtPie.Visibility = Visibility.Visible;
+                    grdPregunta.Visibility = Visibility.Collapsed;
                     txtPreguntaVis.Visibility = Visibility.Visible;
                     graficaRespuestas(lstFiltered);
                 }
@@ -157,6 +153,7 @@ namespace JC_1_5.Pages
                         ans.ColorBrush = colores[i];
                         i++;
                     }
+
                     grdPregunta.Visibility = Visibility.Visible;
                     lstRespuestas.ItemsSource = objPropuesta.question.answers.ToList(); 
                 }      
@@ -428,7 +425,12 @@ namespace JC_1_5.Pages
 
         private void browContenido_Loaded(object sender, RoutedEventArgs e)
         {
-            //browContenido.LoadCompleted += Browser_dohack;          
+            //browContenido.LoadCompleted += Browser_dohack;
+
+            browContenido.NavigateToString("<!doctype html><html><head><style>img {width: 100%;height: auto;} iframe {width:100%; height:500px !important;}</style></head><body onLoad='window.external.notify('rendered_height='+document.getElementById('content').clientHeight);'><div id='content'>" + txtWebBorw + "</div></body></html>");
+            browContenido.UpdateLayout();
+            
+
         }
 
         
@@ -502,6 +504,15 @@ namespace JC_1_5.Pages
 
 
         }
+
+        private void browContenido_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            string[] valuePair = e.Value.Split('=');
+            if (valuePair != null && valuePair[0] == "rendered_height")
+                browContenido.Height = double.Parse(valuePair[1])/2.2;
+
+        }
+
 
 
     }

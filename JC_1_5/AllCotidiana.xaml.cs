@@ -33,10 +33,11 @@ namespace JC_1_5
             
             InitializeComponent();
             this.Loaded += this.MainPageLoaded;
+            
         }
 
         private async void MainPageLoaded(object sender, RoutedEventArgs e)
-        {
+        {            
             var session = SessionStorage.Load();
 
             if (null != session)
@@ -74,6 +75,7 @@ namespace JC_1_5
                 notLogged.Visibility = Visibility.Visible;
                 sitLogged.Visibility = Visibility.Collapsed;
             }
+            
         }
 
         /// <summary>

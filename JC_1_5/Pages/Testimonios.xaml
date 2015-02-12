@@ -1,5 +1,6 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="JC_1_5.Pages.Testimonios"
+    x:Class="JC_1_5.Pages.Testimonios" 
+    xmlns:my="clr-namespace:JC_1_5.Code" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" 
@@ -12,11 +13,13 @@
     Foreground="Black"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
-
+           
     <phone:Pivot Name="pvtRootsManuva">
 
+
+        
         <phone:Pivot.Title>
-            <TextBlock Foreground="Black"  Name="txtTitlePano" FontSize="40" Text="Justicia" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" ></TextBlock>
+            <TextBlock Foreground="White"  Name="txtTitlePano" FontSize="40" Text="Justicia" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" ></TextBlock>
         </phone:Pivot.Title>
 
         <phone:Pivot.Background>
@@ -26,27 +29,24 @@
         <!--Elemento Pivot uno-->
         <phone:PivotItem Name="pvtDescCorta" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab">
             <phone:PivotItem.Header>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Width="Auto"  Foreground="Black" Name="txtTitleItemPano" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
-                </Grid>
+                
+                    <TextBlock Grid.Row="0" Width="Auto"  Foreground="White" Name="txtTitleItemPano" FontSize="50" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="5,0,5,0"></TextBlock>
                 
             </phone:PivotItem.Header>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="150"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="100"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Image Source="/Assets/Icons/ICONO_JUSTICIA_TRABAJO_TRANS.png" VerticalAlignment="Top"  Name="imgLogo" Grid.Row="0" Width="150" Height="150"></Image>
+                <Image Source="/Assets/Icons/ICONO_JUSTICIA_TRABAJO_TRANS.png" VerticalAlignment="Top"  Name="imgLogo" Grid.Row="0" Width="100" Height="100"></Image>
 
 
-                <Grid Grid.Row="1" Background="White" Margin="20,10,20,20">
+                <Grid Grid.Row="1" Background="White" Margin="20,5,20,5">
+                    <ScrollViewer>
                     <TextBlock Foreground="Black" Grid.Row="0" Name="txtExplicacion" TextWrapping="Wrap"  Margin="20,20,20,20" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf #Source Sans Pro" ></TextBlock>
+                    </ScrollViewer>
                 </Grid>
 
                 <Button Grid.Row="2" Content="Ver más" Width="200" Background="#6CDA84" BorderBrush="#6CDA84" Foreground="White" Height="80" Name="btnVerMas" Click="btnVerMas_Click"></Button>
@@ -60,13 +60,14 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" ></ColumnDefinition>
-
                     </Grid.ColumnDefinitions>
-                    <TextBlock Foreground="Black" FontSize="50" Text="Testimonios" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
+                    <TextBlock Foreground="White" FontSize="50" Text="Testimonios" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="0,15,0,10"></TextBlock>
                 </Grid>
                 
             </phone:PivotItem.Header>
-
+            
+            
+            
             <ListBox Name="lbxTestimoniosRoot" Background="White" Margin="20,0,20,10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -74,21 +75,30 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
+                                
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="60" ></RowDefinition>
+                                <RowDefinition Height="Auto" ></RowDefinition>
+                                <RowDefinition Height="Auto" ></RowDefinition>
                                 <RowDefinition Height="*" ></RowDefinition>
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Column="0" Grid.Row="1" VerticalAlignment="Top"  Name="imgGender"  Source="{Binding Path=gender}" Width="90" Height="90" >
-                            </Image>
                             <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom">
                                 <TextBlock VerticalAlignment="Center" Text="{Binding Path=name}" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf#Roboto Slab" FontSize="15" TextWrapping="Wrap"/>
                             </StackPanel>
-                            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
-                                <TextBlock  TextWrapping="Wrap"  Text="{Binding Path=explanation}" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf#Source Sans Pro" Foreground="Black" />
+
+                            <StackPanel Grid.Column="1" Grid.Row="1" >
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Path=state}" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf#Roboto Slab" FontSize="15" TextWrapping="Wrap"/>
                             </StackPanel>
-                            <Rectangle Fill="#6CDA84" Grid.Column="1" Height="1" HorizontalAlignment="Stretch" />
+                            <StackPanel Grid.Column="1" Grid.Row="2" >
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Path=age}" Foreground="Black" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf#Roboto Slab" FontSize="15" TextWrapping="Wrap"/>
+                            </StackPanel>
+
+                            <Image Grid.Column="0" Grid.Row="3" VerticalAlignment="Top"  Name="imgGender"  Source="{Binding Path=gender}" Width="90" Height="90" >
+                            </Image>
+                            <TextBlock Grid.Column="1" Grid.Row="3" TextWrapping="Wrap"  Text="{Binding Path=explanation}" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf#Source Sans Pro" Foreground="Black" FontSize="11" VerticalAlignment="Center" />
+                            <Line Fill="#6CDA84" Grid.Column="3" Height="1" HorizontalAlignment="Stretch"></Line>                                
                         </Grid>
 
                     </DataTemplate>
@@ -98,12 +108,9 @@
 
     </phone:Pivot>
 
-    
-    
-
     <phone:PhoneApplicationPage.ApplicationBar >
         <shell:ApplicationBar>
-            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Add.png" Text="Agregar" x:Name="barAdd" Click="barAdd_Click"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Add.png" Text="Agregar Testimonio" x:Name="barAdd" Click="barAdd_Click"></shell:ApplicationBarIconButton>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

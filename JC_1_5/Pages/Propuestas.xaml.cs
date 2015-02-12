@@ -35,20 +35,33 @@ namespace JC_1_5.Pages
 
         FacebookSession sessionStg;
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            loadList();
+        }
 
         public Propuestas()
         {
+            
             sessionStg = SessionStorage.Load();
 
             InitializeComponent();
+
+        }
+
+        private void loadList()
+        {
             loadPropuestas(lstPropuestas_Familiar, "Justicia para familias");
             loadPropuestas(lstPropuestas_Trabajo, "Justicia en el trabajo");
             loadPropuestas(lstPropuestas_Empresarios, "Justicia en las empresas");
             loadPropuestas(lstPropuestas_Otros, "Otros temas de Justicia Cotidiana");
             loadPropuestas(lstPropuestas_Ciudadanos, "Justicia para ciudadanos");
             loadPropuestas(lstPropuestas_Vecinal, "Justicia vecinal y comunitaria");
-
+            
         }
+
+        
+            
 
         
 
@@ -68,8 +81,7 @@ namespace JC_1_5.Pages
             lstPropuestas objRespPropuestas = JsonConvert.DeserializeObject<lstPropuestas>(responseString);
             objRespPropuestas.items= objRespPropuestas.items.Where(p => p.category == cat).ToList();
             if (objRespPropuestas.items.Count> 0)
-            {
-             
+            {             
                 try
                 {
                     var fb = new FacebookClient(sessionStg.AccessToken);
@@ -162,57 +174,70 @@ namespace JC_1_5.Pages
 
         private void lstPropuestas_Trabajo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Propuesta selectedProp = lstPropuestas_Trabajo.SelectedItem as Propuesta;
-            NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            if ((sender as ListBox).SelectedItems.Count > 0)
+            {
+                Propuesta selectedProp = lstPropuestas_Trabajo.SelectedItem as Propuesta;
+                NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            }
+            
         }
    
 
         private void lstPropuestas_Familiar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            Propuesta selectedProp = lstPropuestas_Familiar.SelectedItem as Propuesta;
+            if ((sender as ListBox).SelectedItems.Count > 0)
+            {
 
-            
-
-
-            NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+                Propuesta selectedProp = lstPropuestas_Familiar.SelectedItem as Propuesta;
+                NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            }
 
         }
 
         private void lstPropuestas_Ciudadanos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            Propuesta selectedProp = lstPropuestas_Ciudadanos.SelectedItem as Propuesta;
+            if ((sender as ListBox).SelectedItems.Count > 0)
+            {
+                Propuesta selectedProp = lstPropuestas_Ciudadanos.SelectedItem as Propuesta;
 
-           
-
-            NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            }
 
         }
 
         private void lstPropuestas_Empresarios_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            Propuesta selectedProp = lstPropuestas_Empresarios.SelectedItem as Propuesta;
+            if ((sender as ListBox).SelectedItems.Count > 0)
+            {
+
+                Propuesta selectedProp = lstPropuestas_Empresarios.SelectedItem as Propuesta;
+                NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            }            
             
-            NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
            
         }
 
         private void lstPropuestas_Vecinal_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            Propuesta selectedProp = lstPropuestas_Vecinal.SelectedItem as Propuesta;
-            
-            NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            if ((sender as ListBox).SelectedItems.Count > 0)
+            {
+                Propuesta selectedProp = lstPropuestas_Vecinal.SelectedItem as Propuesta;
+                NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            }
 
         }
 
         private void lstPropuestas_Otros_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Propuesta selectedProp = lstPropuestas_Otros.SelectedItem as Propuesta;
-            
-            NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            if ((sender as ListBox).SelectedItems.Count > 0)
+            {
+                Propuesta selectedProp = lstPropuestas_Otros.SelectedItem as Propuesta;
+
+                NavigationService.Navigate(new Uri("/Pages/PanoPropuestas.xaml?idProp=" + selectedProp._id, UriKind.Relative));
+            }
 
         }
 

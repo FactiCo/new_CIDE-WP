@@ -1,0 +1,43 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="JC_1_5.Pages.PivotPropuesta"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+        <phone:Pivot Title="MI APLICACIÓN">
+            <!--Elemento Pivot uno-->
+            <phone:PivotItem Header="item1" >
+            
+                
+                <Grid Background="Red" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="300"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Texto que representa el titulo de una propuesta de prueba" FontSize="40"> </TextBlock>
+                <phone:WebBrowser Width="Auto" Height="Auto" Grid.Row="1" Margin="5,5,5,5" IsHitTestVisible="False"  Background="Blue" IsScriptEnabled="True" x:Name="browContenido" />
+                    
+                    
+                    <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Texto que representa el el espacio reservado para la pregunta de la respuesta" FontSize="40"></TextBlock>
+                </Grid>
+
+        </phone:PivotItem>
+
+            <!--Elemento Pivot dos-->
+            <phone:PivotItem Header="item2">
+                <Grid/>
+            </phone:PivotItem>
+        </phone:Pivot>
+    
+    
+</phone:PhoneApplicationPage>

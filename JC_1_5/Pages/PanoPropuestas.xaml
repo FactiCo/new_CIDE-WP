@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"  
-    xmlns:sparrow="clr-namespace:Sparrow.Chart;assembly=Sparrow.Chart.WP8.45"
+    
 
     xmlns:amCharts="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP"
     
@@ -25,85 +25,78 @@
             </ImageBrush>
         </phone:Panorama.Background>
 
+            <phone:PanoramaItem >
+            <phone:PanoramaItem.Header>
+                <TextBlock Text="Propuesta" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"></TextBlock>
+            </phone:PanoramaItem.Header>
 
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="Auto" Background="White">
 
-        
-
-            <phone:PanoramaItem>
-
-                <phone:PanoramaItem.Header>
+                <toolkit:WrapPanel Height="Auto">
+                    
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" ></ColumnDefinition>
-                            <ColumnDefinition Width="*" ></ColumnDefinition>
+                            <ColumnDefinition Width="90"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
-                        <Ellipse Width="80" Grid.Column="0" Margin="3,3,3,3" DataContext="this" >
-                            <Ellipse.Fill>
-                            <ImageBrush  x:Name="imgBrsUsr" ImageSource="{Binding this.objPropuesta.author.urlFoto}"  />
-                            </Ellipse.Fill>
-                        </Ellipse>
-
-                        <StackPanel Margin="10,10,5,5" Grid.Column="1"  VerticalAlignment="Center" >
-
-                                    <TextBlock Name="txtUser" VerticalAlignment="Center" DataContext="this"  Text="{Binding this.objPropuesta.author.name}" TextWrapping="Wrap" Foreground="Gray"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Italic.ttf #Source Sans Pro"  />
-
-                        </StackPanel>
-
-                    </Grid>
-                </phone:PanoramaItem.Header>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <ScrollViewer Grid.Row="0" Background="White">
-
-                    <Grid Background="White" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="500"/>
-                            <RowDefinition Height="150"/>
-                            <RowDefinition Height="400"/>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <TextBlock TextWrapping="Wrap" FontSize="30" Margin="5,5,5,5" Text="{Binding this.objPropuesta.title}" Foreground="Gray"  Grid.Row="0" x:Name="txtTituloWebView"  FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Regular.ttf #Roboto Slab" DataContext="this" />
+                        <Ellipse Grid.Column="0" Grid.Row="0" Width="80" Height="80"  Margin="3,3,3,0" >
+                            <Ellipse.Fill>
+                            <ImageBrush  x:Name="imgBrsUsr"  />
+                        </Ellipse.Fill>
+                        </Ellipse>
 
+                        <TextBlock Grid.Column="2" Grid.Row="0" Name="txtAutor" VerticalAlignment="Center" Text="{Binding this.objPropuesta.author.name}" TextWrapping="Wrap" Foreground="Gray"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Italic.ttf #Source Sans Pro" FontSize="25" />
 
-                        <phone:WebBrowser Background="White" HorizontalAlignment="Stretch" 
-                              VerticalAlignment="Stretch"
-                              VerticalContentAlignment="Center" 
-                              HorizontalContentAlignment="Center" Grid.Row="1" IsScriptEnabled="True" x:Name="browContenido" Loaded="browContenido_Loaded"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Text="Titulo de la propuesta" Foreground="Black" Name="txtTitulo"></TextBlock>
+                    
+                    </Grid>
 
-                        <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <phone:WebBrowser Height="Auto" Width="400" Margin="0,0,0,0"  IsScriptEnabled="True" IsHitTestVisible="False" x:Name="browContenido" Loaded="browContenido_Loaded" ScriptNotify="browContenido_ScriptNotify" />
+                    
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="80"/>
-                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="50"></RowDefinition>
                             </Grid.RowDefinitions>
 
+
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.ColumnSpan="3" Grid.Row="0" Foreground="Black" Text="Vota esta propuesta:"/>
-                            <Button Grid.Row="1" Grid.Column="0" x:Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="120" Height="80" Background="LimeGreen">
+                            <TextBlock HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Foreground="Black" Text="Vota esta propuesta:" Margin="5,5,5,15"/>
+
+                            <Button Grid.Column="0" Grid.Row="1" x:Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="120" Height="80" Background="LimeGreen">
                                 <Image Source="/Assets/Backs/1.png"/>
                             </Button>
-                            <Button Grid.Row="1" Grid.Column="1" x:Name="btnAbstencion" BorderBrush="Gray" Click="btnAbstencion_Click" Width="120" Height="80" Background="Gray">
+                            <Button Grid.Column="1" Grid.Row="1" x:Name="btnAbstencion" BorderBrush="Gray" Click="btnAbstencion_Click" Width="120" Height="80" Background="Gray">
                                 <Image Source="/Assets/Backs/2.png"/>
                             </Button>
 
-                            <Button Grid.Row="1" Grid.Column="2" x:Name="btnContra"  BorderBrush="Red" Click="btnContra_Click" Width="120" Height="80" Background="Red">
+                            <Button Grid.Column="2" Grid.Row="1" x:Name="btnContra"  BorderBrush="Red" Click="btnContra_Click" Width="120" Height="80" Background="Red">
                                 <Image Source="/Assets/Backs/3.png"/>
                             </Button>
 
-                            <TextBlock Text="Votos" Grid.ColumnSpan="3" TextWrapping="Wrap" Grid.Column="0" Grid.Row="2" Foreground="Black" x:Name="txtVotados" />
+                            <TextBlock HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"  TextWrapping="Wrap" Foreground="Black" x:Name="txtVotados" />
                         </Grid>
 
-                        <Grid x:Name="grdPregunta" Visibility="Collapsed" Background="#F2F2F2" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="20,10,20,10">
+                        <Grid Grid.Row="1" x:Name="grdPregunta" Visibility="Collapsed" Background="#F2F2F2" Margin="20,10,20,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="*" />
@@ -116,12 +109,10 @@
                                 <TextBlock Text="¿?" TextAlignment="Center" VerticalAlignment="Top"  Foreground="White" FontSize="35" />
                             </StackPanel>
 
+                            <TextBlock Grid.Row="0" Grid.Column="1"  x:Name="txtPregunta" Foreground="Black"  Text="" Margin="20,20,20,10" TextAlignment="Center" TextWrapping="Wrap" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"/>
 
-                            <StackPanel Grid.Column="1" Grid.Row="0">
-                                <TextBlock  x:Name="txtPregunta" Foreground="Black"  Text="" Margin="30,40,30,10" TextAlignment="Center" TextWrapping="Wrap" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"/>
-                            </StackPanel>
 
-                            <ListBox  Grid.Row="1" Grid.Column="1" Margin="10,10,10,10"  x:Name="lstRespuestas" SelectionChanged="lstRespuestas_SelectionChanged" VerticalAlignment="Center">
+                            <ListBox  Grid.Row="1" Grid.Column="1" Margin="10,5,10,10"  x:Name="lstRespuestas" SelectionChanged="lstRespuestas_SelectionChanged" VerticalAlignment="Center">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid VerticalAlignment="Center" Margin="5,5,5,5">
@@ -134,7 +125,7 @@
                                                     <SolidColorBrush Color="{Binding ColorBrush}"/>
                                                 </Ellipse.Fill>
                                             </Ellipse>
-                                            <TextBlock FontSize="25" Foreground="Black" Grid.Column="1" Text="{Binding title}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf #Source Sans Pro"/>
+                                            <TextBlock Width="Auto" TextWrapping="Wrap" FontSize="25" Foreground="Black" Grid.Column="1" Text="{Binding title}" Margin="5,5,5,5" FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Regular.ttf #Source Sans Pro"/>
                                         </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
@@ -143,36 +134,67 @@
 
                         </Grid>
 
+                        <Grid Grid.Row="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Visibility="Collapsed" Name="txtPreguntaVis" Foreground="Black"  Text=""  TextAlignment="Center" TextWrapping="Wrap" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"/>
-                            <amCharts:PieChart Grid.Row="1" LegendVisibility="Visible" Visibility="Collapsed"  Width="300" Height="300"  x:Name="chrtPie" TitleMemberPath="Title" ValueMemberPath="Value">
+                                <TextBlock Grid.Row="0"  Visibility="Collapsed" Name="txtPreguntaVis" Foreground="Black"  Text=""  TextAlignment="Center" TextWrapping="Wrap" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="5,5,5,10"/>
+                                <amCharts:PieChart Grid.Row="1" Margin="10,10,10,10" FlowDirection="LeftToRight" LegendVisibility="Visible" Visibility="Collapsed"  Width="300" Height="300"  x:Name="chrtPie" TitleMemberPath="Title" ValueMemberPath="Value" VerticalContentAlignment="Bottom" >
+                                    <amCharts:PieChart.Brushes>
+                                        <SolidColorBrush Color="#4A8293" />
+                                        <SolidColorBrush Color="#189A8E"/>
+                                        <SolidColorBrush Color="#58CA8F"/>
+                                        <SolidColorBrush Color="#34CA67"/>
+                                    </amCharts:PieChart.Brushes>
+                                </amCharts:PieChart>
 
-                                <amCharts:PieChart.Brushes>
-                                    <SolidColorBrush Color="#4A8293"/>
-                                    <SolidColorBrush Color="#189A8E"/>
-                                    <SolidColorBrush Color="#58CA8F"/>
-                                    <SolidColorBrush Color="#34CA67"/>
-                                </amCharts:PieChart.Brushes>
-                            </amCharts:PieChart>
 
+                                
+                            </Grid>
                         </Grid>
-                        
                     </Grid>
+                    
+                </toolkit:WrapPanel>
+            </ScrollViewer>
+            <!--<Grid>
+                
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Assets/Backs/pano_v2.png"></ImageBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-                </ScrollViewer>
+                <Grid Grid.Row="0" Background="White" Margin="10,5,10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MinHeight="100"></RowDefinition>
+                        <RowDefinition MinHeight="120"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Grid.Row="0" Grid.Column="0" Text="Titulo de la propuesta" Foreground="Black" Grid.ColumnSpan="2" Name="txtTitulo"></TextBlock>
+
+                    <Ellipse Width="110" Grid.Column="0" Grid.Row="1" Margin="3,3,3,0" >
+                        <Ellipse.Fill>
+                            <ImageBrush  x:Name="imgBrsUsr"  />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Name="txtAutor" VerticalAlignment="Center" Text="{Binding this.objPropuesta.author.name}" TextWrapping="Wrap" Foreground="Gray"  FontFamily="/Assets/NattanFonts/Source_Sans_Pro/SourceSansPro-Italic.ttf #Source Sans Pro" FontSize="40" />
+                </Grid>
+
+                <phone:WebBrowser Margin="10,0,10,0" Grid.Row="1" Width="Auto"  Source=""   Background="White" IsScriptEnabled="True" x:Name="browContenido" />
             </Grid>
+                -->
+
+            
         </phone:PanoramaItem>
-
-
-
-
-
-
 
         <phone:PanoramaItem >
             <phone:PanoramaItem.Header>

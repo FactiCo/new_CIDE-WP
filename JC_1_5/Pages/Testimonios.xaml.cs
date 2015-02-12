@@ -20,14 +20,12 @@ namespace JC_1_5.Pages
 {
     public partial class Testimonios : PhoneApplicationPage
     {
-        string jusID;
+                string jusID;
         public Testimonios()
         {
             InitializeComponent();
             jusID = "";
             objHelper = new Code.Libs();
-
-
         }
 
         JC_1_5.Code.Libs objHelper;
@@ -156,6 +154,12 @@ Fecha: 25 de febrero de 2015
                 {
                     exp.gender = @"/Assets/Icons/NEW_LOGO.png";
                 }
+
+                string[] lstEstados = { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila de Zaragoza", "Colima", "Chiapas", "Chihuahua", "Distrito Federal", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatán", "Zacatecas" };
+
+
+                string newTxt = lstEstados[Convert.ToInt32(exp.state) - 1];
+                exp.state = newTxt;
             }
 
     
