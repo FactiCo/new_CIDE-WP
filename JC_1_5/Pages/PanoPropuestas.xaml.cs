@@ -408,19 +408,19 @@ namespace JC_1_5.Pages
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            var responseGraph = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/respuestas/");
+            var responseRespuestas = await httpClient.GetAsync("http://justiciacotidiana.mx:8080/justiciacotidiana/api/v1/respuestas");
 
-            var responseStringGraph = await response.Content.ReadAsStringAsync();
+            var responseStringRespuestas = await responseRespuestas.Content.ReadAsStringAsync();
 
-
-            lstRespuestaGrafica objRespuestas = JsonConvert.DeserializeObject<lstRespuestaGrafica>(responseStringGraph);
-
+            lstRespuestaGrafica objRespuestas = JsonConvert.DeserializeObject<lstRespuestaGrafica>(responseStringRespuestas);
             List<RespuestaGrafica> lstFiltered = objRespuestas.items.Where(p => p.questionId == objPropuesta.question._id).ToList();
+            RespuestaGrafica ansFilt = lstFiltered.Find(p => p.fcbookid == id);
 
-
+            if (ansFilt != null)
+            {
                 graficaRespuestas(lstFiltered);
+            }
             
-
         }
 
         private void browContenido_Loaded(object sender, RoutedEventArgs e)
@@ -509,7 +509,7 @@ namespace JC_1_5.Pages
         {
             string[] valuePair = e.Value.Split('=');
             if (valuePair != null && valuePair[0] == "rendered_height")
-                browContenido.Height = double.Parse(valuePair[1])/2.2;
+                browContenido.Height = double.Parse(valuePair[1])/2.5;
 
         }
 

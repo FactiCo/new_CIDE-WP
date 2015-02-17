@@ -1,5 +1,5 @@
-﻿<xapCache source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\Justicia Cotidiana.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="12/02/2015 04:54:59 a. m.">
-  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Release\JC_1_5.dll" archivePath="JC_1_5.dll" lastWriteTime="12/02/2015 04:54:45 a. m." />
+﻿<xapCache source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\Justicia Cotidiana.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="17/02/2015 03:24:10 a. m.">
+  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Release\JC_1_5.dll" archivePath="JC_1_5.dll" lastWriteTime="17/02/2015 03:24:03 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\Backs\1.png" archivePath="Assets\Backs\1.png" lastWriteTime="22/01/2015 07:59:59 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\Backs\2.png" archivePath="Assets\Backs\2.png" lastWriteTime="22/01/2015 08:00:11 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\Backs\3.png" archivePath="Assets\Backs\3.png" lastWriteTime="22/01/2015 08:00:20 a. m." />
@@ -87,5 +87,5 @@
   <file source="C:\Users\Mario\documents\Visual Studio 2012\Projects\slnJusticiaCotidiana\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.xml" archivePath="System.Net.Http.Primitives.xml" lastWriteTime="29/01/2015 07:41:57 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\StoreImgs\2.png" archivePath="Assets\StoreImgs\2.png" lastWriteTime="29/01/2015 06:37:29 a. m." />
   <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Assets\StoreImgs\300.png" archivePath="Assets\StoreImgs\300.png" lastWriteTime="29/01/2015 06:37:00 a. m." />
-  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="12/02/2015 04:54:55 a. m." />
+  <file source="C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\Bin\Release\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="17/02/2015 03:24:08 a. m." />
 </xapCache>
