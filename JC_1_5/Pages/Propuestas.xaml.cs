@@ -53,7 +53,7 @@ namespace JC_1_5.Pages
         {
             loadPropuestas(lstPropuestas_Familiar, "Justicia para familias");
             loadPropuestas(lstPropuestas_Trabajo, "Justicia en el trabajo");
-            loadPropuestas(lstPropuestas_Empresarios, "Justicia en las empresas");
+            loadPropuestas(lstPropuestas_Empresarios, "Justicia para emprendedores");
             loadPropuestas(lstPropuestas_Otros, "Otros temas de Justicia Cotidiana");
             loadPropuestas(lstPropuestas_Ciudadanos, "Justicia para ciudadanos");
             loadPropuestas(lstPropuestas_Vecinal, "Justicia vecinal y comunitaria");

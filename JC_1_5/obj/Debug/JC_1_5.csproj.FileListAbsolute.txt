@@ -227,4 +227,3 @@ C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\JC_1_5.csproj.Gener
 C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\JC_1_5.dll
 C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\JC_1_5.pdb
 C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\XapCacheFile.xml
-C:\Users\Mario\documents\GitHub\new_CIDE-WP\JC_1_5\obj\Debug\JC_1_5.csprojResolveAssemblyReference.cache

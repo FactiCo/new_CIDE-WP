@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="es-ES" />
-  <App xmlns="" ProductID="{399d99ba-0689-4d4b-8136-e749e7c25266}" Title="Justicia Cotidiana" RuntimeType="Silverlight" Version="1.5.2.0" Genre="apps.normal" Author="Mario Jimenez" Description="Plataforma interactiva para recopilar testimonios y conocer propuestas relacionadas a la solución, prevención y manejo de controversias y problemas cotidianos, en el marco de las consultas organizadas por el Centro de Investigació y Docencia Económicas" Publisher="JC_1_5" PublisherID="{90751e7e-9876-4698-9dc3-71d2db152fd1}">
+  <App xmlns="" ProductID="{399d99ba-0689-4d4b-8136-e749e7c25266}" Title="Justicia Cotidiana" RuntimeType="Silverlight" Version="1.6.0.0" Genre="apps.normal" Author="Mario Jimenez" Description="Plataforma interactiva para recopilar testimonios y conocer propuestas relacionadas a la solución, prevención y manejo de controversias y problemas cotidianos, en el marco de las consultas organizadas por el Centro de Investigació y Docencia Económicas" Publisher="JC_1_5" PublisherID="{90751e7e-9876-4698-9dc3-71d2db152fd1}">
     <IconPath IsRelative="true" IsResource="false">Assets\StoreImgs\300.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

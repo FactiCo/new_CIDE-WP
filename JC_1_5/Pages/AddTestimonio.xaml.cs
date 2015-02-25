@@ -57,7 +57,7 @@ namespace JC_1_5.Pages
 
         private async void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            if ((lstEdad.SelectedIndex == -1) | (lstGenero.SelectedIndex == -1) | (lstEscolaridad.SelectedIndex == -1))
+            if ((lstEdad.SelectedIndex == -1) | (lstGenero.SelectedIndex == -1) | (lstEscolaridad.SelectedIndex == -1) | (lstEntidad.SelectedIndex == -1) | (txtExplicacion.Text==""))
             {
                 MessageBox.Show("Capture todos los campos obligatorios");
                 return;

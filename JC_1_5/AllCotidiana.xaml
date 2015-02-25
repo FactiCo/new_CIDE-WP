@@ -211,7 +211,7 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Acerca de" x:Name="mnuAcerca" Click="mnuAcerca_Click" >
                 </shell:ApplicationBarMenuItem>
-                <shell:ApplicationBarMenuItem Text="Terminos y condiciones" x:Name="mnuTerminos" Click="mnuTerminos_Click" >
+                <shell:ApplicationBarMenuItem Text="Términos y condiciones" x:Name="mnuTerminos" Click="mnuTerminos_Click" >
                 </shell:ApplicationBarMenuItem>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
