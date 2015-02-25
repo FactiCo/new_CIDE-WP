@@ -57,7 +57,12 @@ namespace JC_1_5.Pages
 
         private async void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            
+            if ((lstEdad.SelectedIndex == -1) | (lstGenero.SelectedIndex == -1) | (lstEscolaridad.SelectedIndex == -1))
+            {
+                MessageBox.Show("Capture todos los campos obligatorios");
+                return;
+            }
+
             TestimonioAdding objTestimonio = new TestimonioAdding();
 
             objTestimonio.name = txtNombre.Text;
@@ -89,7 +94,7 @@ namespace JC_1_5.Pages
 
             var response = await httpClient.PostAsync("http://www.justiciacotidiana.mx:8080/justiciacotidiana/api/v1/testimonios", content);
 
-            var responseString = await response.Content.ReadAsStringAsync();
+           var responseString = await response.Content.ReadAsStringAsync();
             var serializer = new JsonSerializer();
 
             Popup popup = new Popup();

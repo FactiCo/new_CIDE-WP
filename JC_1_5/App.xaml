@@ -5,26 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" 
     xmlns:local="clr-namespace:JC_1_5.Code">
-    <Application.Resources>
-        ﻿
 
-            <Style TargetType="local:ScrollableTextBlock" >
-                
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="local:ScrollableTextBlock">
-                            <ScrollViewer x:Name="ScrollViewer" Foreground="{TemplateBinding Foreground}" 
-                                  Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                                  BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
-                            <StackPanel Orientation="Vertical" x:Name="StackPanel" />
-                            </ScrollViewer>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
- 
-    </Application.Resources>
 
 
     <Application.ApplicationLifetimeObjects>

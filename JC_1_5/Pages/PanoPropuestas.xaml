@@ -1,4 +1,4 @@
-﻿<phone:PhoneApplicationPage
+﻿<phone:PhoneApplicationPage 
     x:Class="JC_1_5.Pages.PanoPropuestas"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     
@@ -30,10 +30,9 @@
                 <TextBlock Text="Propuesta" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"></TextBlock>
             </phone:PanoramaItem.Header>
 
-            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="Auto" Background="White">
 
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="Auto" Background="White">
                 <toolkit:WrapPanel Height="Auto">
-                    
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="90"></ColumnDefinition>
@@ -55,9 +54,8 @@
                         <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Text="Titulo de la propuesta" Foreground="Black" Name="txtTitulo"></TextBlock>
                     
                     </Grid>
-
-                    <phone:WebBrowser Height="Auto" Width="400" Margin="10,10,5,0"  IsScriptEnabled="True" IsHitTestVisible="False" x:Name="browContenido" Loaded="browContenido_Loaded" ScriptNotify="browContenido_ScriptNotify" />
                     
+                    <phone:WebBrowser  Width="350" Margin="10,10,5,0"  IsScriptEnabled="True" IsHitTestVisible="True" x:Name="browContenido" Loaded="browContenido_Loaded" ScriptNotify="browContenido_ScriptNotify"  />
 
                     <Grid>
                         <Grid.RowDefinitions>
@@ -73,7 +71,6 @@
                                 <RowDefinition Height="50"></RowDefinition>
                             </Grid.RowDefinitions>
 
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -83,14 +80,14 @@
                             <TextBlock HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Foreground="Black" Text="Vota esta propuesta:" Margin="5,5,5,15"/>
 
                             <Button Grid.Column="0" Grid.Row="1" x:Name="btnFavor" Click="btnFavor_Click" BorderBrush="LimeGreen" Width="120" Height="80" Background="LimeGreen">
-                                <Image Source="/Assets/Backs/1.png"/>
+                                <Image Name="imgFavor" Source="/Assets/Backs/1.png"/>
                             </Button>
-                            <Button Grid.Column="1" Grid.Row="1" x:Name="btnAbstencion" BorderBrush="Gray" Click="btnAbstencion_Click" Width="120" Height="80" Background="Gray">
-                                <Image Source="/Assets/Backs/2.png"/>
+                            <Button Grid.Column="1" Grid.Row="1" x:Name="btnAbstencion" BorderBrush="Black" Click="btnAbstencion_Click" Width="120" Height="80" Background="Black">
+                                <Image Name="imgAbstencion" Source="/Assets/Backs/2.png"/>
                             </Button>
 
                             <Button Grid.Column="2" Grid.Row="1" x:Name="btnContra"  BorderBrush="Red" Click="btnContra_Click" Width="120" Height="80" Background="Red">
-                                <Image Source="/Assets/Backs/3.png"/>
+                                <Image Name="imgContra" Source="/Assets/Backs/3.png"/>
                             </Button>
 
                             <TextBlock HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"  TextWrapping="Wrap" Foreground="Black" x:Name="txtVotados" />
@@ -141,9 +138,10 @@
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0"  Visibility="Collapsed" Name="txtPreguntaVis" Foreground="Black"  Text=""  TextAlignment="Center" TextWrapping="Wrap" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab" Margin="5,5,5,10"/>
-                                <amCharts:PieChart LegendVisibility="Visible"  Foreground="Black" CharacterSpacing="1" Grid.Row="1" Margin="10,10,10,10" FlowDirection="RightToLeft"  Visibility="Collapsed"  x:Name="chrtPie" TitleMemberPath="Title" ValueMemberPath="Value" Width="280" Height="430" >
-                                    
+                                <TextBlock Grid.Row="0"   Visibility="Collapsed" Name="txtPreguntaVis" Foreground="Black"  Text=""  TextAlignment="Center" TextWrapping="Wrap" FontFamily="/Assets/NattanFonts/Roboto_Slab/RobotoSlab-Bold.ttf #Roboto Slab"  Margin="5,5,5,10"/>
+                                   
+                                <amCharts:PieChart  FontStretch="Condensed" FontSize="12" LegendVisibility="Visible"  Foreground="Black" CharacterSpacing="1" Grid.Row="1" Margin="10,10,10,10" FlowDirection="LeftToRight"  Visibility="Collapsed"  x:Name="chrtPie" TitleMemberPath="Title" ValueMemberPath="Value" Width="320" Height="440" >
+                                  
                                     <amCharts:PieChart.Brushes>
                                         <SolidColorBrush Color="#4A8293" />
                                         <SolidColorBrush Color="#189A8E"/>
@@ -157,9 +155,10 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                    
-                </toolkit:WrapPanel>
+                
+            </toolkit:WrapPanel>
             </ScrollViewer>
+
             <!--<Grid>
                 
                 <Grid.Background>
